@@ -11,12 +11,12 @@ const beforeImg = `${baseUrl}images/antes.webp`;
 
 <section id="resultados" class="section-padding">
     <div class="container">
-        <div class="section-header" style="text-align:center">
+        <div class="section-header">
             <h2>Visualizá el impacto</h2>
-            <p>Explorá tres estilos de staging digital sobre un mismo espacio.</p>
+            <p>Elegí un estilo y deslizá para comparar antes y después.</p>
         </div>
 
-        <div class="comp-card">
+        <div class="comp-card" id="compCard">
             <div class="tabs">
                 {styles.map((s, i) => (
                     <button class="tab" data-style={s.id} data-active={i === 0 ? '' : null} type="button">
@@ -25,16 +25,15 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                 ))}
             </div>
 
-            <div class="viewer">
-                <div class="panel">
+            <div class="slider-container" id="sliderContainer">
+                <div class="slider-half img-before">
                     <img src={beforeImg} alt="Original sin staging" loading="eager" decoding="async" />
-                    <span class="tag tag-left">Original</span>
+                    <span class="tag">Original</span>
                 </div>
-                <div class="vr"></div>
-                <div class="panel after">
+                <div class="slider-half img-after" id="afterHalf">
                     {styles.map((s, i) => (
                         <img
-                            class="result"
+                            class="style-img"
                             data-style={s.id}
                             src={s.img}
                             alt={`Staging ${s.label}`}
@@ -43,19 +42,40 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                             style={{ display: i === 0 ? '' : 'none' }}
                         />
                     ))}
-                    <span class="tag tag-right">Staging</span>
+                    <span class="tag tag-after">Staging</span>
                 </div>
+                <div class="slider-handle" id="sliderHandle">
+                    <div class="handle-circle"></div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider-input" id="sliderInput" aria-label="Comparar antes y después">
             </div>
         </div>
     </div>
 </section>
 
 <style>
+    .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        margin-bottom: 8px;
+    }
+
+    .section-header p {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+    }
+
     .comp-card {
         background: var(--card-bg);
         border: 1px solid rgba(255,255,255,0.06);
         border-radius: 20px;
         overflow: hidden;
+        max-width: 900px;
+        margin: 0 auto;
         box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
@@ -95,29 +115,41 @@ const beforeImg = `${baseUrl}images/antes.webp`;
         border-radius: 1px;
     }
 
-    .viewer {
-        display: flex;
-        align-items: stretch;
-        aspect-ratio: 1380 / 752;
-    }
-
-    .panel {
-        flex: 1;
+    .slider-container {
         position: relative;
-        overflow: hidden;
+        width: 100%;
+        aspect-ratio: 1380 / 752;
+        cursor: ew-resize;
         background: #151515;
     }
 
-    .panel img {
+    .slider-half {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider-half img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
 
-    .after { position: relative; }
+    .img-before {
+        z-index: 1;
+    }
 
-    .result {
+    .img-after {
+        z-index: 2;
+        clip-path: inset(0 0 0 50%);
+    }
+
+    .style-img {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -126,16 +158,10 @@ const beforeImg = `${baseUrl}images/antes.webp`;
         transition: opacity 0.35s ease;
     }
 
-    .vr {
-        width: 1px;
-        background: rgba(255,255,255,0.08);
-        flex-shrink: 0;
-    }
-
     .tag {
         position: absolute;
-        top: 14px;
-        font-size: 0.65rem;
+        top: 16px;
+        font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -145,23 +171,89 @@ const beforeImg = `${baseUrl}images/antes.webp`;
         border-radius: 6px;
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
+        z-index: 3;
     }
 
-    .tag-left { left: 14px; }
-    .tag-right { right: 14px; }
+    .tag-after {
+        right: 16px;
+    }
+
+    .slider-handle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: var(--accent-color);
+        z-index: 3;
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+
+    .handle-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 20px rgba(232, 194, 122, 0.4);
+    }
+
+    .handle-circle::before, .handle-circle::after {
+        content: "";
+        border: solid var(--bg-color);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 4px;
+    }
+
+    .handle-circle::before { transform: rotate(135deg); margin-right: -4px; }
+    .handle-circle::after { transform: rotate(-45deg); margin-left: -4px; }
+
+    .slider-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 4;
+        cursor: ew-resize;
+    }
+
+    @media (max-width: 640px) {
+        .tabs { padding: 0 8px; }
+        .tab { padding: 14px 8px; font-size: 0.8rem; }
+    }
 </style>
 
 <script>
+    const sliderInput = document.getElementById('sliderInput');
+    const afterHalf = document.getElementById('afterHalf');
+    const sliderHandle = document.getElementById('sliderHandle');
     const tabs = document.querySelectorAll('.tab');
-    const results = document.querySelectorAll('.result');
+    const styleImgs = document.querySelectorAll('.style-img');
+
+    if (sliderInput && afterHalf && sliderHandle) {
+        sliderInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            afterHalf.style.clipPath = `inset(0 0 0 ${val}%)`;
+            sliderHandle.style.left = `${val}%`;
+        });
+    }
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.removeAttribute('data-active'));
             tab.setAttribute('data-active', '');
-
             const style = tab.dataset.style;
-            results.forEach(img => {
+            styleImgs.forEach(img => {
                 img.style.display = img.dataset.style === style ? '' : 'none';
             });
         });

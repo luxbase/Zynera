@@ -1,74 +1,92 @@
 ---
+import { WHATSAPP_URL } from '../constants';
 const baseUrl = import.meta.env.BASE_URL;
-const privacyUrl = `${baseUrl}privacidad/`;
 ---
+
 <footer>
-    <div class="container">
-        <a href={baseUrl} class="logo footer-logo" aria-label="Inicio de Zynera">
-            <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
-                <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
-                <path d="M20 25V20H25" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="square"/>
-            </svg>
-            <span class="logo-text">Zynera</span>
-        </a>
-        <p>&copy; 2026 Zynera Marketing Inmobiliario. Todos los derechos reservados.</p>
-        <p style="font-size: 0.8rem; margin-top: 8px; color: var(--text-dim);">Asunción, Paraguay</p>
-        <p class="footer-links"><a href={privacyUrl}>Privacidad</a></p>
-        <p class="project-credit">A LuxBase project</p>
+    <div class="container footer-inner">
+        <div class="footer-brand">
+            <a href={baseUrl} class="footer-logo">
+                <svg class="footer-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
+                    <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
+                    <path d="M20 25V20H25" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="square"/>
+                </svg>
+                Zynera
+            </a>
+            <p class="footer-tag">AI-powered virtual staging</p>
+        </div>
+        <nav class="footer-nav">
+            <a href="#resultados">Resultados</a>
+            <a href="#faq">FAQ</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener">WhatsApp</a>
+            <a href={`${baseUrl}privacidad/`}>Privacidad</a>
+        </nav>
+        <p class="footer-copy">&copy; {new Date().getFullYear()} Zynera</p>
     </div>
 </footer>
 
 <style>
     footer {
-        padding: 60px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
-        text-align: center;
-        color: var(--text-dim);
+        padding: 48px 0;
+    }
+
+    .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 24px;
     }
 
     .footer-logo {
-        margin-bottom: 24px;
         display: flex;
-        justify-content: center;
         align-items: center;
-        gap: 12px;
-        text-decoration: none;
-    }
-
-    .logo-mark {
-        width: 32px;
-        height: 32px;
-    }
-
-    .logo-text {
+        gap: 8px;
         font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         font-weight: 600;
         color: var(--accent-color);
-        letter-spacing: 4px;
-        text-transform: none;
-    }
-
-    .project-credit {
-        font-size: 0.7rem;
-        margin-top: 24px;
+        text-decoration: none;
         letter-spacing: 2px;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.2);
     }
 
-    .footer-links {
-        margin-top: 14px;
-        font-size: 0.85rem;
+    .footer-mark {
+        width: 24px;
+        height: 24px;
     }
 
-    .footer-links a {
+    .footer-tag {
+        color: var(--text-dim);
+        font-size: 0.8rem;
+        margin-top: 2px;
+    }
+
+    .footer-nav {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .footer-nav a {
         color: var(--text-dim);
         text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: color 0.2s;
     }
 
-    .footer-links a:hover {
+    .footer-nav a:hover {
         color: var(--accent-color);
+    }
+
+    .footer-copy {
+        color: var(--text-dim);
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+        opacity: 0.6;
     }
 </style>
