@@ -104,10 +104,10 @@
             background: transparent;
             border: 1px solid var(--accent-color);
             color: var(--accent-color);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: var(--transition-smooth);
             cursor: pointer;
@@ -116,6 +116,20 @@
         .btn-contact:hover {
             background: var(--accent-color);
             color: var(--bg-color);
+        }
+
+        .btn-whatsapp-header {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-smooth);
         }
 
         @media (min-width: 1024px) {
@@ -701,7 +715,7 @@
                 </svg>
                 <span class="logo-text">Zynera</span>
             </a>
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; align-items: center; justify-content: flex-end; flex-grow: 1;">
                 <div class="nav-links">
                     <a href="#servicios">Servicios</a>
                     <a href="#proceso">Proceso</a>
@@ -710,7 +724,7 @@
                 </div>
                 <div class="header-actions">
                     <button class="btn-contact" onclick="toggleModal()">Contactanos</button>
-                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp" style="padding: 10px 20px; font-size: 0.9rem;">WhatsApp</a>
+                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp-header">WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -745,12 +759,6 @@
         <div class="container">
             <h1>Tus propiedades, irresistibles. En 48 horas.</h1>
             <p>Fotografía profesional y decoración virtual diseñada para atraer más consultas y acelerar el proceso de venta.</p>
-            <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <button onclick="toggleModal()" class="btn-contact" style="padding: 16px 32px; font-size: 1.1rem; font-weight: 700;">Contactanos →</button>
-                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20mi%20propiedad%20transformada." class="btn-whatsapp">
-                    WhatsApp →
-                </a>
-            </div>
 
             <div class="hero-visual">
             </div>
@@ -799,7 +807,6 @@
                         <li>Entrega en 48hs</li>
                         <li>Ideal para alquileres</li>
                     </ul>
-                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20B%C3%A1sico." class="btn-outline">Elegir Plan</a>
                 </div>
                 <div class="pricing-card popular">
                     <span class="tier-name">PREMIUM</span>
@@ -810,7 +817,6 @@
                         <li>Reel para Instagram/TikTok</li>
                         <li>Entrega en 48hs</li>
                     </ul>
-                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Premium." class="btn-whatsapp" style="justify-content: center;">Elegir Premium</a>
                 </div>
                 <div class="pricing-card">
                     <span class="tier-name">ELITE</span>
@@ -821,7 +827,6 @@
                         <li>Tomas con Drone</li>
                         <li>Página web propia</li>
                     </ul>
-                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Elite." class="btn-outline">Elegir Plan</a>
                 </div>
             </div>
         </div>
@@ -985,12 +990,6 @@
         <div class="container">
             <h2>¿Querés ver cómo quedaría tu propiedad?</h2>
             <p style="margin-bottom: 40px; color: var(--text-dim);">Empezá tu transformación hoy y acelerá tus cierres.</p>
-            <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <button onclick="toggleModal()" class="btn-contact" style="padding: 20px 40px; font-size: 1.2rem; font-weight: 700;">Contactanos →</button>
-                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20empezar%20la%20transformaci%C3%B3n%20de%20mi%20propiedad." class="btn-whatsapp" style="font-size: 1.2rem; padding: 20px 40px;">
-                    WhatsApp →
-                </a>
-            </div>
         </div>
     </section>
 
