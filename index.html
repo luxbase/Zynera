@@ -67,12 +67,24 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            letter-spacing: 1px;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            letter-spacing: 4px;
+            text-transform: none;
         }
 
         .nav-links {
@@ -570,7 +582,14 @@
 
     <header>
         <div class="container nav">
-            <a href="#" class="logo">ZYNERA</a>
+            <a href="#" class="logo">
+                <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
+                    <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
+                    <path d="M20 25V20H25" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="square"/>
+                </svg>
+                <span class="logo-text">Zynera</span>
+            </a>
             <div class="nav-links">
                 <a href="#servicios">Servicios</a>
                 <a href="#proceso">Proceso</a>
@@ -583,10 +602,10 @@
 
     <section class="hero reveal">
         <div class="container">
-            <h1>Tus propiedades se ven como si un diseñador de interiores las hubiera decorado.</h1>
-            <p>Staging digital y fotografía profesional en 48 horas. Sin muebles, sin esperas, directo a la venta.</p>
-            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp">
-                Consultar Disponibilidad
+            <h1>Tus propiedades, irresistibles. En 48 horas.</h1>
+            <p>Fotografía profesional y decoración virtual diseñada para atraer más consultas y acelerar el proceso de venta.</p>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20mi%20propiedad%20transformada." class="btn-whatsapp">
+                Quiero ver mi propiedad →
             </a>
 
             <div class="hero-visual">
@@ -597,29 +616,24 @@
     <section class="section-padding reveal">
         <div class="container">
             <div class="section-header">
-                <h2>El mercado cambió. Tus fotos también deberían.</h2>
-                <p>El 90% de los compradores empieza su búsqueda online. Si tus fotos no impactan en 2 segundos, perdiste la venta.</p>
+                <h2>Por qué el marketing visual importa</h2>
+                <p>En un mercado saturado, la primera impresión es digital. No dejes que una mala foto detenga tu venta.</p>
             </div>
             <div class="problem-grid">
                 <div class="problem-card">
-                    <span class="icon">🌑</span>
-                    <h3>Fotos oscuras</h3>
-                    <p>Las fotos de celular no capturan la verdadera amplitud ni luz de tus propiedades.</p>
+                    <span class="icon">👁️</span>
+                    <h3>La primera impresión es digital</h3>
+                    <p>El 90% de los compradores empieza en portales. Si la foto no impacta hoy, no hay visita mañana.</p>
                 </div>
                 <div class="problem-card">
-                    <span class="icon">📦</span>
-                    <h3>Espacios vacíos</h3>
-                    <p>Es difícil para un cliente imaginar su futuro hogar en una habitación fría y vacía.</p>
+                    <span class="icon">⏱️</span>
+                    <h3>Velocidad de cierre real</h3>
+                    <p>Las propiedades con decoración virtual reciben 3 veces más consultas y se venden un 40% más rápido.</p>
                 </div>
                 <div class="problem-card">
-                    <span class="icon">⏳</span>
-                    <h3>Largas esperas</h3>
-                    <p>Contratar un decorador físico es caro y demora semanas. Nosotros lo hacemos en horas.</p>
-                </div>
-                <div class="problem-card">
-                    <span class="icon">📉</span>
-                    <h3>Pocas consultas</h3>
-                    <p>Anuncios con fotos mediocres reciben hasta un 70% menos de clics.</p>
+                    <span class="icon">⭐</span>
+                    <h3>Captaciones con exclusividad</h3>
+                    <p>Ofrecer marketing visual premium te posiciona como un agente de élite, facilitando la firma de nuevas exclusividades.</p>
                 </div>
             </div>
         </div>
@@ -636,8 +650,8 @@
                     <span class="tier-name">BÁSICO</span>
                     <div class="tier-price">$75 <span>/ Propiedad</span></div>
                     <ul class="tier-features">
-                        <li>10 Fotos profesionales</li>
-                        <li>Edición de iluminación</li>
+                        <li>Fotografía profesional</li>
+                        <li>Edición avanzada de luz</li>
                         <li>Entrega en 48hs</li>
                         <li>Ideal para alquileres</li>
                     </ul>
@@ -647,10 +661,10 @@
                     <span class="tier-name">PREMIUM</span>
                     <div class="tier-price">$180 <span>/ Propiedad</span></div>
                     <ul class="tier-features">
-                        <li>20 Fotos profesionales</li>
-                        <li>4 Ambientes con Staging Digital</li>
-                        <li>Video recorrido 4K</li>
-                        <li>Entrega prioritaria</li>
+                        <li>Fotografía profesional</li>
+                        <li>Decoración virtual (Social)</li>
+                        <li>Reel para Instagram/TikTok</li>
+                        <li>Entrega en 48hs</li>
                     </ul>
                     <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Premium." class="btn-whatsapp" style="justify-content: center;">Elegir Premium</a>
                 </div>
@@ -658,10 +672,10 @@
                     <span class="tier-name">ELITE</span>
                     <div class="tier-price">$380 <span>/ Propiedad</span></div>
                     <ul class="tier-features">
-                        <li>Fotos ilimitadas</li>
-                        <li>Staging Digital en toda la casa</li>
-                        <li>Video con Drone</li>
-                        <li>Página web propia del inmueble</li>
+                        <li>Cobertura total</li>
+                        <li>Staging virtual completo</li>
+                        <li>Tomas con Drone</li>
+                        <li>Página web propia</li>
                     </ul>
                     <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Elite." class="btn-outline">Elegir Plan</a>
                 </div>
@@ -746,20 +760,29 @@
                 <h2>Lo que dicen los expertos</h2>
             </div>
             <div class="testimonial-card">
-                <p class="testimonial-text">"Desde que uso Zynera para mis captaciones de lujo, el tiempo de venta se redujo a la mitad. El staging digital es indistinguible de la realidad."</p>
+                <p class="testimonial-text">"Desde que delegué la fotografía en ellos, el tiempo de rotación de mis departamentos bajó de tres meses a solo veinte días."</p>
                 <div class="testimonial-author">
                     <div class="author-info">
                         <h5>Carlos Mendoza</h5>
-                        <p>Agente Top Producer - Asunción</p>
+                        <p>Broker Asociado - Century 21</p>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card">
-                <p class="testimonial-text">"La mejor inversión para mi inmobiliaria. Las fotos atraen perfiles de clientes con mayor poder adquisitivo."</p>
+                <p class="testimonial-text">"La decoración virtual es indistinguible de la realidad. Mis clientes se sorprenden gratamente al ver el potencial que antes no imaginaban."</p>
                 <div class="testimonial-author">
                     <div class="author-info">
-                        <h5>Sofia Rodriguez</h5>
-                        <p>Directora de Inmobiliaria - Ciudad del Este</p>
+                        <h5>María José Duarte</h5>
+                        <p>Agente Independiente - Asunción</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Es la mejor inversión para mis captaciones. El volumen de consultas subió apenas publicamos las nuevas fotos profesionales."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h5>Jorge Villalba</h5>
+                        <p>Director - Inmobiliaria del Este</p>
                     </div>
                 </div>
             </div>
@@ -773,42 +796,42 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    ¿Qué es el staging digital? <span class="faq-toggle">▼</span>
+                    ¿Tengo que mover muebles o decorar la propiedad? <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Es una tecnología que permite insertar muebles, decoración y texturas hiperrealistas en fotos de ambientes vacíos, ayudando a los compradores a visualizar el potencial del hogar.
+                    No es necesario. Nosotros capturamos el espacio tal cual está y luego realizamos la decoración virtual sobre la imagen real en post-producción.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    ¿En cuánto tiempo entregan el material? <span class="faq-toggle">▼</span>
+                    ¿En cuánto tiempo recibo el material final? <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Nuestro compromiso de entrega es de máximo 48 horas hábiles después de realizada la sesión de fotos.
+                    Nuestro compromiso de entrega es de 48 horas hábiles después de realizada la sesión de fotos en la propiedad.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    ¿Puedo elegir el estilo de los muebles? <span class="faq-toggle">▼</span>
+                    ¿Llegan a todo el país? <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Sí, contamos con catálogos de estilo: Moderno, Industrial, Escandinavo y Clásico para que se adapte al perfil de tu propiedad.
+                    Actualmente cubrimos Gran Asunción, Ciudad del Este y Encarnación. Consultanos por disponibilidad y viáticos para otras zonas de Paraguay.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    ¿Llegan a todo Paraguay? <span class="faq-toggle">▼</span>
+                    ¿Qué estilos de decoración utilizan? <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Actualmente cubrimos Gran Asunción, Ciudad del Este y Encarnación. Consultar por otras zonas.
+                    Contamos con catálogos modernos, industriales y clásicos. Seleccionamos el estilo que mejor se adapte al perfil del comprador ideal para esa zona.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">
-                    ¿Tengo que estar presente en la sesión? <span class="faq-toggle">▼</span>
+                    ¿Las fotos sirven para portales y redes sociales? <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    No es estrictamente necesario, siempre que tengamos acceso a la propiedad (llaves en portería o código de acceso).
+                    Sí. Todo el material se entrega en alta resolución para portales y optimizado para Instagram, TikTok y Facebook.
                 </div>
             </div>
         </div>
@@ -817,9 +840,9 @@
     <section class="final-cta reveal">
         <div class="container">
             <h2>¿Querés ver cómo quedaría tu propiedad?</h2>
-            <p style="margin-bottom: 40px; color: var(--text-dim);">Envianos una foto hoy y te mostramos el potencial.</p>
-            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20un%20ejemplo%20de%20cómo%20quedaría%20mi%20propiedad." class="btn-whatsapp" style="font-size: 1.2rem; padding: 20px 40px;">
-                Hablar con un Asesor
+            <p style="margin-bottom: 40px; color: var(--text-dim);">Empezá tu transformación hoy y acelerá tus cierres.</p>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20empezar%20la%20transformaci%C3%B3n%20de%20mi%20propiedad." class="btn-whatsapp" style="font-size: 1.2rem; padding: 20px 40px;">
+                Empezar mi transformación hoy
             </a>
         </div>
     </section>
