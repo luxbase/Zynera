@@ -1,17 +1,103 @@
-<div class="modal" id="tallyModal" role="dialog" aria-modal="true" aria-hidden="true">
+---
+const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
+---
+
+<div class="modal" id="zyneraModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <span class="modal-title">Solicitud de Staging Digital</span>
-            <button class="modal-close" id="closeTally" type="button" aria-label="Cerrar">&times;</button>
+            <button class="modal-close" id="closeModal" type="button" aria-label="Cerrar">&times;</button>
         </div>
-        <div id="formContainer">
-            <iframe src="https://tally.so/r/xX6NNk" width="100%" height="100%" frameborder="0" allow="camera; microphone; autoplay"></iframe>
+
+        <div class="step-indicator" id="stepIndicator">
+            <div class="step-dot active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
         </div>
+
+        <form id="wizardForm" class="wizard-form" novalidate>
+            <div class="step-content">
+                <div class="step-panel active" data-step="1">
+                    <label class="step-label" for="name">¿Cuál es tu nombre?</label>
+                    <input type="text" id="name" class="input" name="Nombre" placeholder="Tu nombre" required autocomplete="name">
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+
+                <div class="step-panel" data-step="2">
+                    <label class="step-label" for="email">¿Cuál es tu email?</label>
+                    <input type="email" id="email" class="input" name="Email" placeholder="tu@email.com" required autocomplete="email">
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+
+                <div class="step-panel" data-step="3">
+                    <label class="step-label">Foto de prueba</label>
+                    <div class="file-upload" id="fileDropZone">
+                        <input type="file" id="photo" name="Foto" accept="image/*" required hidden>
+                        <div class="file-placeholder" id="filePlaceholder">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
+                            <span>Haz clic o arrastra una foto</span>
+                            <small>PNG, JPG o WebP &middot; M&aacute;x 5 MB</small>
+                        </div>
+                        <div class="file-preview" id="filePreview" style="display:none">
+                            <img id="previewImg" alt="Preview">
+                            <button type="button" class="file-remove" id="fileRemove">&times;</button>
+                        </div>
+                    </div>
+                    <span class="error-msg" id="photoError"></span>
+                </div>
+
+                <div class="step-panel" data-step="4">
+                    <label class="step-label">Estilo deseado</label>
+                    <div class="style-options">
+                        <label class="style-option">
+                            <input type="radio" name="Estilo" value="Mediterráneo" required>
+                            <span>Mediterr&aacute;neo</span>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="Estilo" value="Manhattan">
+                            <span>Manhattan</span>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="Estilo" value="Minimalista">
+                            <span>Minimalista</span>
+                        </label>
+                    </div>
+                    <span class="error-msg" id="styleError"></span>
+                    <label class="consent-label">
+                        <input type="checkbox" name="Consentimiento" value="Acepto" required>
+                        <span>Acepto la <a href="/Zynera/privacidad" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="step-nav">
+                <button type="button" class="btn-back" id="btnBack" style="visibility:hidden">Atr&aacute;s</button>
+                <button type="button" class="btn-next" id="btnNext">Siguiente</button>
+                <button type="submit" class="btn-submit" id="btnSubmit" style="display:none">Enviar solicitud</button>
+            </div>
+        </form>
+
+        <div id="loadingContainer" style="display:none">
+            <div class="spinner"></div>
+            <p>Enviando solicitud...</p>
+        </div>
+
         <div id="successContainer" style="display:none">
             <div class="success-icon">&#10003;</div>
             <h2>¡Solicitud enviada!</h2>
-            <p>Recibimos tu información. Te contactaremos pronto.</p>
-            <button class="btn-new" id="newSubmission" type="button">Nueva solicitud</button>
+            <p>Recibimos tu informaci&oacute;n. Te contactaremos pronto.</p>
+            <button class="btn-new" id="btnNew" type="button">Nueva solicitud</button>
+        </div>
+
+        <div id="errorContainer" style="display:none">
+            <div class="error-icon">!</div>
+            <h2>Algo sali&oacute; mal</h2>
+            <p id="errorMsg">Intenta de nuevo m&aacute;s tarde.</p>
+            <button class="btn-retry" id="btnRetry" type="button">Intentar de nuevo</button>
         </div>
     </div>
 </div>
@@ -19,33 +105,25 @@
 <style>
     .modal {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
+        inset: 0;
+        background: rgba(0,0,0,0.85);
         z-index: 2000;
         display: none;
         align-items: center;
         justify-content: center;
-        padding: 20px;
-        backdrop-filter: blur(8px);
+        padding: 16px;
+        backdrop-filter: blur(6px);
     }
-
-    .modal.active {
-        display: flex;
-    }
+    .modal.active { display: flex; }
 
     .modal-content {
         background: #1a1a1a;
-        padding: 0;
         border-radius: 20px;
-        max-width: 760px;
+        max-width: 480px;
         width: 100%;
-        height: 92svh;
-        max-height: 920px;
-        overflow: hidden;
-        position: relative;
+        min-height: 400px;
+        max-height: 90svh;
+        overflow-y: auto;
         border: 1px solid rgba(255,255,255,0.08);
         box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         display: flex;
@@ -56,7 +134,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 16px 14px 24px;
+        padding: 16px 20px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
         flex-shrink: 0;
     }
@@ -69,26 +147,12 @@
         letter-spacing: 0.02em;
     }
 
-    #formContainer {
-        width: 100%;
-        flex: 1;
-        min-height: 0;
-    }
-
-    #formContainer iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-        display: block;
-    }
-
     .modal-close {
         background: rgba(255,255,255,0.06);
         border: none;
         color: #a0a0a0;
         font-size: 1.3rem;
         cursor: pointer;
-        line-height: 1;
         width: 32px;
         height: 32px;
         border-radius: 8px;
@@ -97,21 +161,305 @@
         justify-content: center;
         transition: all 0.2s;
     }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
-    .modal-close:hover {
-        background: rgba(255,255,255,0.12);
-        color: white;
+    /* Step indicator */
+    .step-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 24px 24px 0;
+        flex-shrink: 0;
     }
 
-    @media (max-width: 560px) {
-        .modal-content {
-            height: 96svh;
-            max-height: none;
-            border-radius: 12px;
-            margin: 0;
-        }
+    .step-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        color: #666;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
     }
 
+    .step-dot.active {
+        background: #e8c27a;
+        color: #0f0f0f;
+    }
+
+    .step-dot.done {
+        background: #e8c27a;
+        color: #0f0f0f;
+        opacity: 0.6;
+    }
+
+    .step-line {
+        flex: 1;
+        max-width: 48px;
+        height: 2px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 1px;
+    }
+
+    /* Form */
+    .wizard-form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 32px 24px 24px;
+        min-height: 0;
+    }
+
+    .step-content {
+        flex: 1;
+        position: relative;
+    }
+
+    .step-panel {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        animation: fadeIn 0.25s ease;
+    }
+
+    .step-panel.active { display: flex; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-label {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #fff;
+        margin-bottom: 4px;
+    }
+
+    .input {
+        width: 100%;
+        padding: 12px 14px;
+        background: #262626;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        color: #fff;
+        font-size: 0.95rem;
+        font-family: 'DM Sans', sans-serif;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .input:focus { border-color: #e8c27a; }
+    .input::placeholder { color: #555; }
+
+    .error-msg {
+        font-size: 0.8rem;
+        color: #ff6b6b;
+        min-height: 1.2em;
+    }
+
+    /* File upload */
+    .file-upload {
+        border: 1px dashed rgba(255,255,255,0.15);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+        position: relative;
+    }
+
+    .file-upload:hover,
+    .file-upload.dragover {
+        border-color: #e8c27a;
+        background: rgba(232,194,122,0.05);
+    }
+
+    .file-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: #a0a0a0;
+    }
+
+    .file-placeholder svg { margin-bottom: 4px; }
+    .file-placeholder small { font-size: 0.75rem; color: #555; }
+
+    .file-preview {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .file-preview img {
+        max-height: 180px;
+        max-width: 100%;
+        border-radius: 8px;
+        object-fit: contain;
+    }
+
+    .file-remove {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.8);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Style options */
+    .style-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .style-option {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .style-option input { display: none; }
+
+    .style-option span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        background: #262626;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        color: #a0a0a0;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+    }
+
+    .style-option input:checked + span {
+        background: rgba(232,194,122,0.12);
+        border-color: #e8c27a;
+        color: #e8c27a;
+    }
+
+    .style-option span:hover {
+        border-color: rgba(255,255,255,0.2);
+        color: #fff;
+    }
+
+    /* Consent */
+    .consent-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .consent-label input[type="checkbox"] {
+        margin-top: 3px;
+        width: 18px;
+        height: 18px;
+        accent-color: #e8c27a;
+        flex-shrink: 0;
+    }
+
+    .consent-label span {
+        font-size: 0.85rem;
+        color: #a0a0a0;
+        line-height: 1.4;
+    }
+
+    .consent-label a {
+        color: #e8c27a;
+        text-decoration: underline;
+    }
+
+    /* Navigation */
+    .step-nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        flex-shrink: 0;
+    }
+
+    .btn-back {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #a0a0a0;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-right: auto;
+    }
+
+    .btn-back:hover {
+        border-color: rgba(255,255,255,0.25);
+        color: #fff;
+    }
+
+    .btn-next, .btn-submit {
+        background: #e8c27a;
+        border: none;
+        color: #0f0f0f;
+        padding: 10px 28px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-next:hover, .btn-submit:hover { background: #d4ae65; }
+    .btn-next:disabled, .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Loading */
+    #loadingContainer {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        gap: 16px;
+        padding: 60px 24px;
+    }
+
+    .spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(232,194,122,0.2);
+        border-top-color: #e8c27a;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #loadingContainer p { color: #a0a0a0; font-size: 0.9rem; }
+
+    /* Success */
     #successContainer {
         display: none;
         flex-direction: column;
@@ -119,7 +467,7 @@
         justify-content: center;
         flex: 1;
         text-align: center;
-        padding: 40px;
+        padding: 60px 24px;
     }
 
     .success-icon {
@@ -132,98 +480,324 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 
-    #successContainer h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
-
-    #successContainer p {
-        color: #a0a0a0;
-        margin-bottom: 28px;
-    }
+    #successContainer h2 { font-size: 1.4rem; margin-bottom: 8px; }
+    #successContainer p { color: #a0a0a0; margin-bottom: 24px; }
 
     .btn-new {
         background: #e8c27a;
         color: #0f0f0f;
         border: none;
-        padding: 14px 36px;
-        border-radius: 12px;
-        font-size: 1rem;
+        padding: 12px 32px;
+        border-radius: 10px;
+        font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.2s;
     }
 
-    .btn-new:hover {
-        background: #d4ae65;
+    .btn-new:hover { background: #d4ae65; }
+
+    /* Error */
+    #errorContainer {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+        padding: 60px 24px;
+    }
+
+    .error-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #ff4444;
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    #errorContainer h2 { font-size: 1.4rem; margin-bottom: 8px; }
+    #errorContainer p { color: #a0a0a0; margin-bottom: 24px; }
+
+    .btn-retry {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #fff;
+        padding: 12px 32px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-retry:hover { border-color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 560px) {
+        .modal-content { max-height: 96svh; border-radius: 14px; }
+        .wizard-form { padding: 24px 16px 16px; }
+        .style-options { flex-direction: column; }
+        .style-option { min-width: 0; }
     }
 </style>
 
 <style is:global>
-    body.modal-open-tally {
-        overflow: hidden;
-    }
+    body.modal-open-zynera { overflow: hidden; }
 </style>
 
 <script>
-    const modal = document.getElementById('tallyModal');
-    const formContainer = document.getElementById('formContainer');
-    const successContainer = document.getElementById('successContainer');
-    const iframe = document.querySelector('#tallyModal iframe');
+    const MODAL = document.getElementById('zyneraModal');
+    const FORM = document.getElementById('wizardForm');
+    const FORM_WRAPPER = FORM;
+    const LOADING = document.getElementById('loadingContainer');
+    const SUCCESS = document.getElementById('successContainer');
+    const ERROR = document.getElementById('errorContainer');
+    const ERROR_MSG = document.getElementById('errorMsg');
 
-    const resetForm = () => {
-        formContainer.style.display = '';
-        successContainer.style.display = 'none';
-        if (iframe) {
-            const src = iframe.src;
-            iframe.src = '';
-            iframe.src = src;
+    let currentStep = 1;
+    const totalSteps = 4;
+    let fileData = null;
+
+    const els = (id) => document.getElementById(id);
+
+    const show = (el) => { if (el) el.style.display = 'flex'; };
+    const hide = (el) => { if (el) el.style.display = 'none'; };
+    const block = (el) => { if (el) el.style.display = ''; };
+
+    function openModal() {
+        resetWizard();
+        MODAL?.classList.add('active');
+        MODAL?.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open-zynera');
+    }
+
+    function closeModal() {
+        MODAL?.classList.remove('active');
+        MODAL?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open-zynera');
+    }
+
+    function goToStep(step) {
+        currentStep = step;
+        document.querySelectorAll('.step-panel').forEach(p => p.classList.toggle('active', +p.dataset.step === step));
+        document.querySelectorAll('.step-dot').forEach(d => {
+            const s = +d.dataset.step;
+            d.classList.toggle('active', s === step);
+            d.classList.toggle('done', s < step);
+        });
+
+        const back = els('btnBack');
+        back.style.visibility = step > 1 ? 'visible' : 'hidden';
+
+        const next = els('btnNext');
+        const submit = els('btnSubmit');
+        if (step === totalSteps) {
+            next.style.display = 'none';
+            submit.style.display = '';
+            validateStep(step);
+        } else {
+            next.style.display = '';
+            submit.style.display = 'none';
         }
-    };
 
-    const showSuccess = () => {
-        formContainer.style.display = 'none';
-        successContainer.style.display = 'flex';
-    };
+        validateStep(step);
+    }
 
-    const openModal = () => {
-        resetForm();
-        modal?.classList.add('active');
-        modal?.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open-tally');
-    };
+    function validateStep(step) {
+        const btn = step === totalSteps ? els('btnSubmit') : els('btnNext');
+        btn.disabled = true;
 
-    const closeModal = () => {
-        modal?.classList.remove('active');
-        modal?.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open-tally');
-    };
+        switch (step) {
+            case 1: {
+                const v = els('name').value.trim();
+                btn.disabled = v.length < 2;
+                break;
+            }
+            case 2: {
+                const v = els('email').value.trim();
+                btn.disabled = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+                break;
+            }
+            case 3: {
+                btn.disabled = !fileData;
+                break;
+            }
+            case 4: {
+                const style = FORM.querySelector('input[name="Estilo"]:checked');
+                const consent = FORM.querySelector('input[name="Consentimiento"]:checked');
+                btn.disabled = !style || !consent;
+                break;
+            }
+        }
+    }
+
+    function resetWizard() {
+        FORM.reset();
+        fileData = null;
+        els('filePlaceholder').style.display = '';
+        els('filePreview').style.display = 'none';
+        els('previewImg').src = '';
+        document.querySelectorAll('.error-msg').forEach(e => e.textContent = '');
+        hide(SUCCESS);
+        hide(ERROR);
+        block(FORM_WRAPPER);
+        hide(LOADING);
+        goToStep(1);
+    }
+
+    // Event listeners
+    els('closeModal')?.addEventListener('click', closeModal);
+    els('btnNew')?.addEventListener('click', resetWizard);
+
+    MODAL?.addEventListener('click', (e) => { if (e.target === MODAL) closeModal(); });
+    MODAL?.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
     window.addEventListener('toggle-modal', () => {
-        if (modal?.classList.contains('active')) {
-            closeModal();
-        } else {
-            openModal();
+        MODAL?.classList.contains('active') ? closeModal() : openModal();
+    });
+
+    // Input validation on change
+    els('name')?.addEventListener('input', () => {
+        const v = els('name').value.trim();
+        els('nameError').textContent = v.length < 2 && v.length > 0 ? 'Mínimo 2 caracteres' : '';
+        validateStep(1);
+    });
+
+    els('email')?.addEventListener('input', () => {
+        const v = els('email').value.trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        els('emailError').textContent = v.length > 0 && !valid ? 'Email inválido' : '';
+        validateStep(2);
+    });
+
+    // File upload
+    const fileInput = els('photo');
+    const dropZone = els('fileDropZone');
+
+    fileInput?.addEventListener('change', () => {
+        handleFile(fileInput.files[0]);
+    });
+
+    dropZone?.addEventListener('click', () => fileInput?.click());
+
+    dropZone?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone?.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const f = e.dataTransfer?.files?.[0];
+        if (f) {
+            fileInput.files = e.dataTransfer.files;
+            handleFile(f);
         }
     });
 
-    document.getElementById('closeTally')?.addEventListener('click', closeModal);
-    document.getElementById('newSubmission')?.addEventListener('click', resetForm);
-
-    modal?.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
+    els('fileRemove')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearFile();
     });
 
-    modal?.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
+    function handleFile(f) {
+        els('photoError').textContent = '';
+        if (!f) { clearFile(); return; }
+        if (!f.type.startsWith('image/')) {
+            els('photoError').textContent = 'Solo imágenes (PNG, JPG, WebP)';
+            clearFile();
+            return;
+        }
+        if (f.size > 5 * 1024 * 1024) {
+            els('photoError').textContent = 'Máximo 5 MB';
+            clearFile();
+            return;
+        }
+        fileData = f;
+        els('filePlaceholder').style.display = 'none';
+        els('filePreview').style.display = 'flex';
+        const reader = new FileReader();
+        reader.onload = (e) => { els('previewImg').src = e.target.result; };
+        reader.readAsDataURL(f);
+        validateStep(3);
+    }
+
+    function clearFile() {
+        fileData = null;
+        fileInput.value = '';
+        els('filePlaceholder').style.display = '';
+        els('filePreview').style.display = 'none';
+        els('previewImg').src = '';
+        validateStep(3);
+    }
+
+    // Style + consent validation
+    FORM.querySelectorAll('input[name="Estilo"]').forEach(r => {
+        r.addEventListener('change', () => validateStep(4));
     });
 
-    window.addEventListener('message', (e) => {
-        if (e.origin === 'https://tally.so' && typeof e.data === 'string' && e.data.includes('Tally.FormSubmitted')) {
-            showSuccess();
+    FORM.querySelector('input[name="Consentimiento"]')?.addEventListener('change', () => validateStep(4));
+
+    // Navigation buttons
+    els('btnNext')?.addEventListener('click', () => {
+        if (currentStep < totalSteps) goToStep(currentStep + 1);
+    });
+
+    els('btnBack')?.addEventListener('click', () => {
+        if (currentStep > 1) goToStep(currentStep - 1);
+    });
+
+    // Submit
+    FORM?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (els('btnSubmit').disabled) return;
+
+        block(LOADING);
+        hide(FORM_WRAPPER);
+        hide(ERROR);
+
+        const fd = new FormData();
+        fd.append('Nombre', els('name').value.trim());
+        fd.append('Email', els('email').value.trim());
+        if (fileData) fd.append('Foto', fileData);
+        fd.append('Estilo', FORM.querySelector('input[name="Estilo"]:checked').value);
+        fd.append('Consentimiento', 'Acepto');
+
+        try {
+            const res = await fetch('https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e', {
+                method: 'POST',
+                body: fd,
+            });
+
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            hide(LOADING);
+            show(SUCCESS);
+        } catch (err) {
+            hide(LOADING);
+            ERROR_MSG.textContent = 'Error al enviar. Intenta de nuevo.';
+            show(ERROR);
         }
     });
+
+    els('btnRetry')?.addEventListener('click', () => {
+        hide(ERROR);
+        block(FORM_WRAPPER);
+    });
+
+    // Init
+    goToStep(1);
 </script>
