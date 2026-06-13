@@ -1,12 +1,111 @@
+<div class="modal" id="tallyModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+        <button class="modal-close" id="closeTally" type="button" aria-label="Cerrar">&times;</button>
+        <iframe src="https://tally.so/r/xX6NNk" width="100%" height="100%" frameborder="0" style="border: 0; min-height: 520px;" allow="camera; microphone; autoplay"></iframe>
+    </div>
+</div>
+
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: transparent;
+        padding: 0;
+        border-radius: 20px;
+        max-width: 720px;
+        width: 100%;
+        height: 80svh;
+        max-height: 700px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        background: rgba(0,0,0,0.6);
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 10;
+        line-height: 1;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-close:hover {
+        background: rgba(0,0,0,0.9);
+    }
+
+    @media (max-width: 560px) {
+        .modal-content {
+            height: 90svh;
+            border-radius: 12px;
+        }
+    }
+</style>
+
+<style is:global>
+    body.modal-open-tally {
+        overflow: hidden;
+    }
+</style>
+
 <script>
-    const TALLY_KEY = 'tly-xX6NNk';
-    const TALLY_URL = 'https://tally.so/r/xX6NNk';
+    const modal = document.getElementById('tallyModal');
+
+    const openModal = () => {
+        modal?.classList.add('active');
+        modal?.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open-tally');
+    };
+
+    const closeModal = () => {
+        modal?.classList.remove('active');
+        modal?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open-tally');
+    };
 
     window.addEventListener('toggle-modal', () => {
-        if (typeof Tally !== 'undefined') {
-            Tally.openPopup(TALLY_KEY);
+        if (modal?.classList.contains('active')) {
+            closeModal();
         } else {
-            window.open(TALLY_URL, '_blank', 'noopener');
+            openModal();
         }
+    });
+
+    document.getElementById('closeTally')?.addEventListener('click', closeModal);
+
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    modal?.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
     });
 </script>
