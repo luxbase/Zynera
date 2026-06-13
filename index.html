@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zynera | Staging Digital y Marketing Inmobiliario Premium</title>
+    <meta name="description" content="Transformamos propiedades en anuncios profesionales que generan más interés usando staging digital y fotografía profesional en Paraguay.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --accent-color: #e8c27a;
+            --accent-hover: #d4ae65;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --card-bg: #1a1a1a;
+            --whatsapp-green: #25D366;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                gap: 32px;
+            }
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(232, 194, 122, 0.05) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .hero-visual {
+            margin-top: 60px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #111;
+        }
+
+        .hero-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        /* --- Problem --- */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 600px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+
+        .problem-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition-smooth);
+        }
+
+        .problem-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .problem-card .icon {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .problem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .problem-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* --- Services --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--accent-color);
+        }
+
+        .pricing-card.popular::before {
+            content: "MÁS ELEGIDO";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+        }
+
+        .tier-name {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .tier-price {
+            font-size: 3rem;
+            margin-bottom: 32px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            margin-bottom: 16px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tier-features li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* --- Process --- */
+        .process-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin: 0 auto 24px;
+            font-size: 1.2rem;
+        }
+
+        /* --- Slider Results --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            cursor: ew-resize;
+        }
+
+        .slider-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-style: italic;
+        }
+
+        .img-before {
+            background: linear-gradient(135deg, #111, #222);
+            color: #555;
+            z-index: 1;
+        }
+
+        .img-after {
+            background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+            color: var(--accent-color);
+            z-index: 2;
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent-color);
+            z-index: 3;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .handle-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(232, 194, 122, 0.4);
+        }
+
+        .handle-circle::before, .handle-circle::after {
+            content: "";
+            border: solid var(--bg-color);
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 4px;
+        }
+
+        .handle-circle::before { transform: rotate(135deg); margin-right: -4px; }
+        .handle-circle::after { transform: rotate(-45deg); margin-left: -4px; }
+
+        .slider-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 4;
+            cursor: ew-resize;
+        }
+
+        /* --- Metrics --- */
+        .metrics {
+            background: var(--card-bg);
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .metric-item h4 {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .metric-item p {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* --- Testimonials --- */
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-info h5 {
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .author-info p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* --- FAQ --- */
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-dim);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* --- Final CTA --- */
+        .final-cta {
+            text-align: center;
+            padding: 120px 0;
+            background: linear-gradient(to bottom, transparent, rgba(232, 194, 122, 0.05));
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 24px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        .footer-logo {
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-header h2 { font-size: 2rem; }
+            .tier-price { font-size: 2.5rem; }
+            .final-cta h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav">
+            <a href="#" class="logo">ZYNERA</a>
+            <div class="nav-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#proceso">Proceso</a>
+                <a href="#resultados">Resultados</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp" style="padding: 10px 20px; font-size: 0.9rem;">WhatsApp</a>
+        </div>
+    </header>
+
+    <section class="hero reveal">
+        <div class="container">
+            <h1>Tus propiedades se ven como si un diseñador de interiores las hubiera decorado.</h1>
+            <p>Staging digital y fotografía profesional en 48 horas. Sin muebles, sin esperas, directo a la venta.</p>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp">
+                Consultar Disponibilidad
+            </a>
+
+            <div class="hero-visual">
+                <div class="hero-placeholder">
+                    [ Imagen: Propiedad de lujo con staging digital ]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>El mercado cambió. Tus fotos también deberían.</h2>
+                <p>El 90% de los compradores empieza su búsqueda online. Si tus fotos no impactan en 2 segundos, perdiste la venta.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="icon">🌑</span>
+                    <h3>Fotos oscuras</h3>
+                    <p>Las fotos de celular no capturan la verdadera amplitud ni luz de tus propiedades.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="icon">📦</span>
+                    <h3>Espacios vacíos</h3>
+                    <p>Es difícil para un cliente imaginar su futuro hogar en una habitación fría y vacía.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="icon">⏳</span>
+                    <h3>Largas esperas</h3>
+                    <p>Contratar un decorador físico es caro y demora semanas. Nosotros lo hacemos en horas.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="icon">📉</span>
+                    <h3>Pocas consultas</h3>
+                    <p>Anuncios con fotos mediocres reciben hasta un 70% menos de clics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="section-padding reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planes diseñados para vender</h2>
+                <p>Desde departamentos compactos hasta residencias de lujo.</p>
+            </div>
+            <div class="services-grid">
+                <div class="pricing-card">
+                    <span class="tier-name">BÁSICO</span>
+                    <div class="tier-price">$75 <span>/ Propiedad</span></div>
+                    <ul class="tier-features">
+                        <li>10 Fotos profesionales</li>
+                        <li>Edición de iluminación</li>
+                        <li>Entrega en 48hs</li>
+                        <li>Ideal para alquileres</li>
+                    </ul>
+                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20B%C3%A1sico." class="btn-outline">Elegir Plan</a>
+                </div>
+                <div class="pricing-card popular">
+                    <span class="tier-name">PREMIUM</span>
+                    <div class="tier-price">$180 <span>/ Propiedad</span></div>
+                    <ul class="tier-features">
+                        <li>20 Fotos profesionales</li>
+                        <li>4 Ambientes con Staging Digital</li>
+                        <li>Video recorrido 4K</li>
+                        <li>Entrega prioritaria</li>
+                    </ul>
+                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Premium." class="btn-whatsapp" style="justify-content: center;">Elegir Premium</a>
+                </div>
+                <div class="pricing-card">
+                    <span class="tier-name">ELITE</span>
+                    <div class="tier-price">$380 <span>/ Propiedad</span></div>
+                    <ul class="tier-features">
+                        <li>Fotos ilimitadas</li>
+                        <li>Staging Digital en toda la casa</li>
+                        <li>Video con Drone</li>
+                        <li>Página web propia del inmueble</li>
+                    </ul>
+                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Me%20interesa%20el%20Plan%20Elite." class="btn-outline">Elegir Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proceso" class="section-padding reveal">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <h2>Tu propiedad lista en 4 pasos</h2>
+            </div>
+            <div class="process-row">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Agendamos</h3>
+                    <p>Coordinamos la visita a la propiedad en el horario que mejor te quede.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Capturamos</h3>
+                    <p>Fotografía profesional de alta gama usando equipo de última generación.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Transformamos</h3>
+                    <p>Nuestra tecnología de staging digital decora los espacios vacíos con estilo.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Recibís</h3>
+                    <p>En menos de 48hs tenés todo el material listo para publicar y vender.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resultados" class="section-padding reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>Visualizá el impacto</h2>
+                <p>Deslizá para ver cómo transformamos un espacio vacío en un anuncio de lujo.</p>
+            </div>
+            
+            <div class="slider-container" id="beforeAfter">
+                <div class="slider-img img-before">
+                    <span style="position: absolute; left: 20px; top: 20px; font-size: 0.8rem; letter-spacing: 1px; opacity: 0.5;">ANTES</span>
+                    ANUNCIO COMÚN
+                </div>
+                <div class="slider-img img-after" id="afterImg">
+                    <span style="position: absolute; right: 20px; top: 20px; font-size: 0.8rem; letter-spacing: 1px;">DESPUÉS</span>
+                    EFECTO ZYNERA
+                </div>
+                <div class="slider-handle" id="sliderHandle">
+                    <div class="handle-circle"></div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider-input" id="sliderInput">
+            </div>
+
+            <div class="metrics">
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <h4>3x</h4>
+                        <p>Más consultas</p>
+                    </div>
+                    <div class="metric-item">
+                        <h4>48h</h4>
+                        <p>Entrega promedio</p>
+                    </div>
+                    <div class="metric-item">
+                        <h4>800+</h4>
+                        <p>Agentes en Paraguay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lo que dicen los expertos</h2>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Desde que uso Zynera para mis captaciones de lujo, el tiempo de venta se redujo a la mitad. El staging digital es indistinguible de la realidad."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h5>Carlos Mendoza</h5>
+                        <p>Agente Top Producer - Asunción</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"La mejor inversión para mi inmobiliaria. Las fotos atraen perfiles de clientes con mayor poder adquisitivo."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h5>Sofia Rodriguez</h5>
+                        <p>Directora de Inmobiliaria - Ciudad del Este</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding reveal">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header">
+                <h2>Preguntas Frecuentes</h2>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Qué es el staging digital? <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Es una tecnología que permite insertar muebles, decoración y texturas hiperrealistas en fotos de ambientes vacíos, ayudando a los compradores a visualizar el potencial del hogar.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿En cuánto tiempo entregan el material? <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Nuestro compromiso de entrega es de máximo 48 horas hábiles después de realizada la sesión de fotos.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Puedo elegir el estilo de los muebles? <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sí, contamos con catálogos de estilo: Moderno, Industrial, Escandinavo y Clásico para que se adapte al perfil de tu propiedad.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Llegan a todo Paraguay? <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Actualmente cubrimos Gran Asunción, Ciudad del Este y Encarnación. Consultar por otras zonas.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Tengo que estar presente en la sesión? <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    No es estrictamente necesario, siempre que tengamos acceso a la propiedad (llaves en portería o código de acceso).
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta reveal">
+        <div class="container">
+            <h2>¿Querés ver cómo quedaría tu propiedad?</h2>
+            <p style="margin-bottom: 40px; color: var(--text-dim);">Envianos una foto hoy y te mostramos el potencial.</p>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20un%20ejemplo%20de%20cómo%20quedaría%20mi%20propiedad." class="btn-whatsapp" style="font-size: 1.2rem; padding: 20px 40px;">
+                Hablar con un Asesor
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo footer-logo">ZYNERA</a>
+            <p>&copy; 2026 Zynera Marketing Inmobiliario. Todos los derechos reservados.</p>
+            <p style="font-size: 0.8rem; margin-top: 8px;">Asunción, Paraguay • Argentina • Uruguay</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Slider Logic ---
+        const sliderInput = document.getElementById('sliderInput');
+        const afterImg = document.getElementById('afterImg');
+        const sliderHandle = document.getElementById('sliderHandle');
+
+        sliderInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            afterImg.style.clipPath = `inset(0 0 0 ${value}%)`;
+            sliderHandle.style.left = `${value}%`;
+        });
+
+        // --- FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // --- Scroll Reveal ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
