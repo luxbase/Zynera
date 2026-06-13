@@ -36,11 +36,11 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
                 <div class="step-panel" data-step="3">
                     <label class="step-label">Foto de prueba</label>
                     <div class="file-upload" id="fileDropZone">
-                        <input type="file" id="photo" name="Foto" accept="image/*" required hidden>
+                        <input type="file" id="photo" name="Foto" accept="image/png,image/jpeg" required hidden>
                         <div class="file-placeholder" id="filePlaceholder">
                             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
                             <span>Haz clic o arrastra una foto</span>
-                            <small>PNG, JPG o WebP &middot; M&aacute;x 5 MB</small>
+                            <small>PNG o JPG &middot; M&aacute;x 5 MB</small>
                         </div>
                         <div class="file-preview" id="filePreview" style="display:none">
                             <img id="previewImg" alt="Preview">
@@ -716,8 +716,8 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
     function handleFile(f) {
         els('photoError').textContent = '';
         if (!f) { clearFile(); return; }
-        if (!f.type.startsWith('image/')) {
-            els('photoError').textContent = 'Solo imágenes (PNG, JPG, WebP)';
+        if (!['image/png','image/jpeg'].includes(f.type)) {
+            els('photoError').textContent = 'Solo PNG o JPG';
             clearFile();
             return;
         }
@@ -777,12 +777,11 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         fd.append('Consentimiento', 'Acepto');
 
         try {
-            const res = await fetch('https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e', {
+            await fetch('https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e', {
                 method: 'POST',
                 body: fd,
+                mode: 'no-cors',
             });
-
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
             hide(LOADING);
             show(SUCCESS);
