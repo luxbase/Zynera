@@ -4,7 +4,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Transformamos propiedades en anuncios profesionales que generan más interés usando staging digital y fotografía profesional en Paraguay." } = Astro.props;
+const { title, description = "AI-powered virtual staging — transform empty spaces into premium listings in seconds." } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,10 +16,9 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@380;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
@@ -28,14 +27,17 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 
 <style is:global>
 	:root {
-		--bg-color: #0f0f0f;
-		--accent-color: #e8c27a;
+		--bg: #fafafa;
+		--bg-card: #ffffff;
+		--text: #1a1a1a;
+		--text-dim: #8a8a8a;
+		--text-muted: #b0b0b0;
+		--border: rgba(0,0,0,0.06);
+		--border-strong: rgba(0,0,0,0.1);
+		--accent: #e8c27a;
 		--accent-hover: #d4ae65;
-		--text-main: #ffffff;
-		--text-dim: #a0a0a0;
-		--card-bg: #1a1a1a;
-		--whatsapp-green: #25D366;
-		--transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+		--radius: 16px;
+		--radius-sm: 10px;
 	}
 
 	* {
@@ -45,17 +47,20 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 	}
 
 	body {
-		background-color: var(--bg-color);
-		color: var(--text-main);
+		background: var(--bg);
+		color: var(--text);
 		font-family: 'DM Sans', sans-serif;
+		font-weight: 380;
+		font-size: 16px;
 		line-height: 1.6;
-		overflow-x: hidden;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	h1, h2, h3 {
 		font-family: 'Playfair Display', serif;
 		font-weight: 600;
-		overflow-wrap: anywhere;
+		letter-spacing: -0.01em;
 	}
 
 	.container {
@@ -69,73 +74,9 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 		padding: 100px 0;
 	}
 
-	.section-header {
-		margin-bottom: 60px;
-	}
-
-	.section-header h2 {
-		font-size: 2.5rem;
-		margin-bottom: 16px;
-	}
-
-	.section-header p {
-		color: var(--text-dim);
-		max-width: 600px;
-	}
-
-	/* --- Animations --- */
-	.reveal {
-		opacity: 0;
-		transform: translateY(30px);
-		transition: var(--transition-smooth);
-	}
-
-	.reveal.active {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
 	@media (max-width: 768px) {
-		.section-header h2 {
-			font-size: 1.55rem;
-			line-height: 1.15;
-			max-width: 300px;
-		}
-
-		.section-header p {
-			max-width: 300px;
+		.section-padding {
+			padding: 64px 0;
 		}
 	}
 </style>
-
-<script>
-	// --- Scroll Reveal ---
-	const revealElements = document.querySelectorAll('.reveal');
-	const revealOnScroll = () => {
-		revealElements.forEach(el => {
-			const rect = el.getBoundingClientRect();
-			if (rect.top < window.innerHeight * 0.85) {
-				el.classList.add('active');
-			}
-		});
-	};
-
-	window.addEventListener('scroll', revealOnScroll);
-	window.addEventListener('load', revealOnScroll);
-
-	// Smooth Scroll
-	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-		anchor.addEventListener('click', function (e) {
-			const href = this.getAttribute('href');
-			if (href && href.startsWith('#')) {
-				e.preventDefault();
-				const target = document.querySelector(href);
-				if (target) {
-					target.scrollIntoView({
-						behavior: 'smooth'
-					});
-				}
-			}
-		});
-	});
-</script>

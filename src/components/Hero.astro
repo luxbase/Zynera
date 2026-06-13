@@ -1,117 +1,67 @@
----
-const afterImageSrc = `${import.meta.env.BASE_URL}images/despues.webp`;
----
-<section class="hero reveal">
+<section class="hero">
     <div class="container">
-        <h1>Tus propiedades, irresistibles. <br/>En 48 horas.</h1>
-        <p>Fotografía profesional y decoración virtual diseñada para atraer más consultas y acelerar el proceso de venta.</p>
-        
-        <div class="hero-actions">
-            <button class="btn-wizard" id="heroWizardBtn" type="button">Probar el sistema ahora →</button>
-        </div>
-
-        <figure class="hero-visual">
-            <img src={afterImageSrc} alt="Ambiente inmobiliario terminado con staging digital de Zynera" loading="eager" decoding="async" />
-        </figure>
+        <h1>Transform empty spaces into premium listings</h1>
+        <p>AI-powered virtual staging in seconds across design styles</p>
+        <button class="btn-primary" id="heroCta" type="button">Try with your photo</button>
     </div>
 </section>
 
 <style>
-    .btn-wizard {
-        background-color: var(--accent-color);
-        color: var(--bg-color);
-        border: none;
-        padding: 16px 32px;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-    }
-
-    .btn-wizard:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(232, 194, 122, 0.2);
-    }
-
-    .hero-actions {
-        margin-top: 40px;
-    }
-
     .hero {
-        padding: 160px 0 100px;
+        padding: 180px 0 80px;
         text-align: center;
-        position: relative;
-        background: radial-gradient(circle at center, rgba(232, 194, 122, 0.05) 0%, transparent 70%);
     }
 
     .hero h1 {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        line-height: 1.1;
-        margin-bottom: 24px;
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 1.08;
+        max-width: 820px;
+        margin: 0 auto 20px;
+        letter-spacing: -0.02em;
     }
 
     .hero p {
         color: var(--text-dim);
-        font-size: 1.2rem;
-        max-width: 600px;
+        font-size: 1.15rem;
+        max-width: 480px;
         margin: 0 auto 40px;
+        font-weight: 400;
     }
 
-    .hero-visual {
-        margin-top: 60px;
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        aspect-ratio: 16/9;
-        background: #171717;
+    .btn-primary {
+        background: var(--text);
+        color: #fff;
+        border: none;
+        padding: 14px 36px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        font-family: 'DM Sans', sans-serif;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.2s;
     }
 
-    .hero-visual img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
+    .btn-primary:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
         .hero {
-            padding-top: 140px;
+            padding: 140px 0 60px;
         }
-
         .hero h1 {
-            font-size: 2.15rem;
-            max-width: 300px;
+            max-width: 340px;
         }
-
         .hero p {
-            font-size: 1.05rem;
-            max-width: 280px;
-        }
-
-        .hero-visual {
-            width: min(320px, calc(100vw - 80px));
-            max-width: min(320px, calc(100vw - 80px));
-            border-radius: 16px;
-        }
-
-        .btn-wizard {
-            max-width: calc(100vw - 48px);
-            padding-left: 24px;
-            padding-right: 24px;
+            font-size: 1rem;
+            max-width: 320px;
         }
     }
 </style>
 
 <script>
-    document.getElementById('heroWizardBtn')?.addEventListener('click', () => {
+    document.getElementById('heroCta')?.addEventListener('click', () => {
         window.dispatchEvent(new CustomEvent('toggle-modal'));
     });
 </script>

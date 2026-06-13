@@ -1,132 +1,85 @@
----
----
-<section id="faq" class="section-padding reveal">
-    <div class="container" style="max-width: 800px;">
+<section id="faq" class="section-padding faq">
+    <div class="container">
         <div class="section-header">
-            <h2>Preguntas Frecuentes</h2>
+            <h2>Frequently asked questions</h2>
         </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-                ¿Tengo que mover muebles o decorar la propiedad? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-1" hidden>
-                No es necesario. Nosotros capturamos el espacio tal cual está y luego realizamos la decoración virtual sobre la imagen real en post-producción.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-                ¿En cuánto tiempo recibo el material final? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-2" hidden>
-                Nuestro compromiso de entrega es de 48 horas hábiles después de realizada la sesión de fotos en la propiedad.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-                ¿Llegan a todo el país? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-3" hidden>
-                Actualmente cubrimos Gran Asunción, proximamente Ciudad del Este y Encarnación. Consultanos por disponibilidad y viáticos para otras zonas de Paraguay.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-                ¿Qué estilos de decoración utilizan? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-4" hidden>
-                Contamos con catálogos modernos, industriales y clásicos. Seleccionamos el estilo que mejor se adapte al perfil del comprador ideal para esa zona.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-                ¿Las fotos sirven para portales y redes sociales? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-5" hidden>
-                Sí. Todo el material se entrega en alta resolución para portales y optimizado para Instagram, TikTok y Facebook.
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 60px;">
-            <button class="btn-wizard" id="faqWizardBtn" type="button">Probar el sistema →</button>
+        <div class="faq-list">
+            <details class="faq-item" open>
+                <summary>How does AI virtual staging work?</summary>
+                <p>Upload a photo of an empty room. Our AI generates three design styles — Mediterranean, Manhattan, and Minimalist — giving you a realistic preview of how the space could look staged.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What kind of photos do you need?</summary>
+                <p>Any clear photo of a room works best with natural light and minimal clutter. We accept PNG and JPG files up to 5 MB.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How long does it take?</summary>
+                <p>Results are generated in seconds. The whole process — upload, preview, download — takes under a minute.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I use the staged images for listings?</summary>
+                <p>Yes. The output images are ready for MLS, brochures, and online listings at full resolution.</p>
+            </details>
         </div>
     </div>
 </section>
 
 <style>
+    .faq {
+        padding-top: 0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .faq-list {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
     .faq-item {
-        background: var(--card-bg);
-        border-radius: 12px;
-        margin-bottom: 16px;
-        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
     }
 
-    .faq-question {
-        padding: 24px;
+    .faq-item summary {
+        font-size: 0.95rem;
+        font-weight: 500;
         cursor: pointer;
+        list-style: none;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        font-weight: 700;
-        width: 100%;
-        background: transparent;
-        border: 0;
-        color: var(--text-main);
-        font: inherit;
-        text-align: left;
+        justify-content: space-between;
+        color: var(--text);
     }
 
-    .faq-answer {
-        padding: 0 24px 24px;
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: '+';
+        font-size: 1.2rem;
         color: var(--text-dim);
+        font-weight: 300;
+        transition: transform 0.2s;
     }
 
-    .faq-toggle {
-        transition: transform 0.3s ease;
+    .faq-item[open] summary::after {
+        transform: rotate(45deg);
     }
 
-    .faq-item.active .faq-toggle {
-        transform: rotate(180deg);
-    }
-
-    .btn-wizard {
-        background-color: var(--accent-color);
-        color: var(--bg-color);
-        border: none;
-        padding: 14px 28px;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-    }
-
-    .btn-wizard:hover {
-        opacity: 0.9;
+    .faq-item p {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        padding-top: 12px;
+        max-width: 580px;
     }
 </style>
-
-<script>
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question?.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            faqItems.forEach(i => {
-                i.classList.remove('active');
-                i.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-                const answer = i.querySelector('.faq-answer') as HTMLElement | null;
-                if (answer) answer.hidden = true;
-            });
-            if (!isActive) {
-                item.classList.add('active');
-                question.setAttribute('aria-expanded', 'true');
-                const answer = item.querySelector('.faq-answer') as HTMLElement | null;
-                if (answer) answer.hidden = false;
-            }
-        });
-    });
-
-    document.getElementById('faqWizardBtn')?.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('toggle-modal'));
-    });
-</script>

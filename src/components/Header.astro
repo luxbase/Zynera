@@ -1,12 +1,10 @@
 ---
-import { WHATSAPP_URL } from '../constants';
 const baseUrl = import.meta.env.BASE_URL;
-const isHomePage = Astro.url.pathname === baseUrl;
-const homeAnchorPrefix = isHomePage ? '' : baseUrl;
 ---
+
 <header>
     <div class="container nav">
-        <a href={baseUrl} class="logo" aria-label="Inicio de Zynera">
+        <a href={baseUrl} class="logo" aria-label="Zynera inicio">
             <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
                 <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
@@ -15,15 +13,11 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
             <span class="logo-text">Zynera</span>
         </a>
         <div class="nav-links">
-            <a href={`${homeAnchorPrefix}#servicios`}>Servicios</a>
-            <a href={`${homeAnchorPrefix}#proceso`}>Proceso</a>
-            <a href={`${homeAnchorPrefix}#resultados`}>Resultados</a>
-            <a href={`${homeAnchorPrefix}#faq`}>FAQ</a>
+            <a href="#comparar">Estilos</a>
+            <a href="#galeria">Galería</a>
+            <a href="#faq">FAQ</a>
         </div>
-        <div class="header-actions">
-            <button class="btn-contact" id="openContact" type="button">Probar sistema →</button>
-            <a href={WHATSAPP_URL} class="btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
+        <button class="btn-cta" id="openContact" type="button">Probar sistema</button>
     </div>
 </header>
 
@@ -33,114 +27,75 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
         top: 0;
         width: 100%;
         z-index: 1000;
-        background: rgba(15, 15, 15, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 20px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(250,250,250,0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
     }
 
     .nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height: 64px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .logo-mark {
+        width: 28px;
+        height: 28px;
+    }
+
+    .logo-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 3px;
     }
 
     .nav-links {
-        display: none;
-        gap: 24px;
-    }
-
-    @media (min-width: 900px) {
-        .nav-links {
-            display: flex;
-        }
+        display: flex;
+        gap: 32px;
     }
 
     .nav-links a {
         color: var(--text-dim);
         text-decoration: none;
         font-size: 0.85rem;
-        transition: var(--transition-smooth);
+        font-weight: 500;
+        transition: color 0.2s;
     }
 
     .nav-links a:hover {
-        color: var(--accent-color);
+        color: var(--text);
     }
 
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-    }
-
-    .logo-mark {
-        width: 32px;
-        height: 32px;
-    }
-
-    .logo-text {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: var(--accent-color);
-        letter-spacing: 4px;
-        text-transform: none;
-    }
-
-    .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .btn-contact {
-        background: transparent;
-        border: 1px solid var(--accent-color);
-        color: var(--accent-color);
-        padding: 8px 16px;
-        border-radius: 50px;
-        text-decoration: none;
+    .btn-cta {
+        background: var(--text);
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
         font-size: 0.85rem;
         font-weight: 500;
-        transition: var(--transition-smooth);
+        font-family: 'DM Sans', sans-serif;
         cursor: pointer;
+        transition: opacity 0.2s;
     }
 
-    .btn-contact:hover {
-        background: var(--accent-color);
-        color: var(--bg-color);
+    .btn-cta:hover {
+        opacity: 0.85;
     }
 
-    .btn-whatsapp {
-        background-color: var(--whatsapp-green);
-        color: white;
-        padding: 8px 16px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: var(--transition-smooth);
-    }
-
-    @media (max-width: 560px) {
-        header {
-            padding: 18px 0;
-        }
-
-        .logo {
-            gap: 10px;
-        }
-
-        .logo-text {
-            font-size: 1.25rem;
-            letter-spacing: 3px;
-        }
-
-        .header-actions {
+    @media (max-width: 640px) {
+        .nav-links {
             display: none;
         }
     }
