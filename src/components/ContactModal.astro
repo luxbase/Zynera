@@ -11,9 +11,8 @@ const privacyUrl = `${import.meta.env.BASE_URL}privacidad/`;
 
         <div id="formWrapper">
             <form id="contactForm" enctype="multipart/form-data" novalidate>
-                <input type="hidden" name="access_key" value="08ec9f6d-e485-4aa6-a4f1-f56823048f86">
-                <input type="hidden" name="from_name" value="Zynera Staging Wizard">
-                <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="_subject" value="Nueva prueba de staging - Zynera">
+                <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
 
                 <div class="step active" data-step="1">
                     <h2 class="step-title" id="stepTitle1">¿A quién le enviamos la foto?</h2>
@@ -26,10 +25,6 @@ const privacyUrl = `${import.meta.env.BASE_URL}privacidad/`;
                     <div class="form-group">
                         <label for="contactEmail">Email Profesional</label>
                         <input type="email" name="email" id="contactEmail" required placeholder="tu@empresa.com" autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="contactMessage">Instrucciones</label>
-                        <textarea name="message" id="contactMessage" required placeholder="Ej: living vacío, estilo cálido, mantener pisos y ventanas"></textarea>
                     </div>
 
                     <div class="wizard-actions">
@@ -825,8 +820,10 @@ const privacyUrl = `${import.meta.env.BASE_URL}privacidad/`;
 
         const formData = new FormData(contactForm);
 
-        fetch('https://api.web3forms.com/submit', {
+        // Reemplazá YOUR_FORM_ID con tu ID de Formspree (ej: xyzabcde)
+        fetch('https://formspree.io/f/YOUR_FORM_ID', {
             method: 'POST',
+            headers: { 'Accept': 'application/json' },
             body: formData
         })
         .then(async (response) => {
@@ -847,7 +844,7 @@ const privacyUrl = `${import.meta.env.BASE_URL}privacidad/`;
             let message = 'No pudimos enviar la solicitud. Intentá de nuevo.';
             try {
                 const json = await response.json();
-                if (json?.message) message = json.message;
+                if (json?.error) message = json.error;
             } catch {
                 // Keep the generic message when the provider returns a non-JSON error.
             }
