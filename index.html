@@ -97,17 +97,17 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .btn-contact {
             background: transparent;
             border: 1px solid var(--accent-color);
             color: var(--accent-color);
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: var(--transition-smooth);
             cursor: pointer;
@@ -118,18 +118,12 @@
             color: var(--bg-color);
         }
 
-        .btn-whatsapp-small {
-            background-color: var(--whatsapp-green);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition-smooth);
+        @media (min-width: 1024px) {
+            .nav-links {
+                display: flex;
+                gap: 32px;
+                margin-right: 32px;
+            }
         }
 
         /* --- Modal --- */
@@ -707,42 +701,43 @@
                 </svg>
                 <span class="logo-text">Zynera</span>
             </a>
-            <div class="header-actions">
-                <button class="btn-contact" onclick="toggleModal()">Contactanos</button>
-                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp-small">WhatsApp</a>
+            <div style="display: flex; align-items: center;">
+                <div class="nav-links">
+                    <a href="#servicios">Servicios</a>
+                    <a href="#proceso">Proceso</a>
+                    <a href="#resultados">Resultados</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-contact" onclick="toggleModal()">Contactanos</button>
+                    <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp" style="padding: 10px 20px; font-size: 0.9rem;">WhatsApp</a>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Contact Modal -->
     <div class="modal" id="contactModal">
-        <div class="modal-content" id="modalContent">
+        <div class="modal-content">
             <button class="modal-close" onclick="toggleModal()">&times;</button>
-            <div id="formWrapper">
-                <h2 style="margin-bottom: 24px; font-family: 'Playfair Display', serif;">Envianos un mensaje</h2>
-                <form id="contactForm">
-                    <input type="hidden" name="access_key" value="08ec9f6d-e485-4aa6-a4f1-f56823048f86">
-                    <div class="form-group">
-                        <label>Nombre Completo</label>
-                        <input type="text" name="name" required placeholder="Tu nombre">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" required placeholder="tu@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Mensaje</label>
-                        <textarea name="message" rows="4" required placeholder="¿En qué podemos ayudarte?"></textarea>
-                    </div>
-                    <input type="hidden" name="from_name" value="Zynera Landing Page">
-                    <button type="submit" class="btn-submit" id="submitBtn">Enviar Mensaje</button>
-                </form>
-            </div>
-            <div id="successMessage" style="display: none; text-align: center; padding: 40px 0;">
-                <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
-                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 12px;">¡Mensaje enviado!</h2>
-                <p style="color: var(--text-dim);">Muchas gracias, te contactaremos pronto.</p>
-            </div>
+            <h2 style="margin-bottom: 24px; font-family: 'Playfair Display', serif;">Envianos un mensaje</h2>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="08ec9f6d-e485-4aa6-a4f1-f56823048f86">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" name="name" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Mensaje</label>
+                    <textarea name="message" rows="4" required placeholder="¿En qué podemos ayudarte?"></textarea>
+                </div>
+                <input type="hidden" name="from_name" value="Zynera Landing Page">
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
         </div>
     </div>
 
@@ -751,8 +746,8 @@
             <h1>Tus propiedades, irresistibles. En 48 horas.</h1>
             <p>Fotografía profesional y decoración virtual diseñada para atraer más consultas y acelerar el proceso de venta.</p>
             <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <button onclick="toggleModal()" class="btn-contact" style="padding: 12px 24px; font-size: 1rem; font-weight: 700;">Contactanos →</button>
-                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20mi%20propiedad%20transformada." class="btn-whatsapp-small" style="padding: 12px 24px; font-size: 1rem;">
+                <button onclick="toggleModal()" class="btn-contact" style="padding: 16px 32px; font-size: 1.1rem; font-weight: 700;">Contactanos →</button>
+                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20ver%20mi%20propiedad%20transformada." class="btn-whatsapp">
                     WhatsApp →
                 </a>
             </div>
@@ -991,8 +986,8 @@
             <h2>¿Querés ver cómo quedaría tu propiedad?</h2>
             <p style="margin-bottom: 40px; color: var(--text-dim);">Empezá tu transformación hoy y acelerá tus cierres.</p>
             <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <button onclick="toggleModal()" class="btn-contact" style="padding: 12px 24px; font-size: 1.1rem; font-weight: 700;">Contactanos →</button>
-                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20empezar%20la%20transformaci%C3%B3n%20de%20mi%20propiedad." class="btn-whatsapp-small" style="font-size: 1.1rem; padding: 12px 24px;">
+                <button onclick="toggleModal()" class="btn-contact" style="padding: 20px 40px; font-size: 1.2rem; font-weight: 700;">Contactanos →</button>
+                <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20empezar%20la%20transformaci%C3%B3n%20de%20mi%20propiedad." class="btn-whatsapp" style="font-size: 1.2rem; padding: 20px 40px;">
                     WhatsApp →
                 </a>
             </div>
@@ -1020,64 +1015,7 @@
         function toggleModal() {
             const modal = document.getElementById('contactModal');
             modal.classList.toggle('active');
-            
-            // Reset form visibility if closing after success
-            if (!modal.classList.contains('active')) {
-                setTimeout(() => {
-                    document.getElementById('formWrapper').style.display = 'block';
-                    document.getElementById('successMessage').style.display = 'none';
-                    document.getElementById('contactForm').reset();
-                }, 500);
-            }
         }
-
-        // --- Form Logic ---
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            const formWrapper = document.getElementById('formWrapper');
-            const successMessage = document.getElementById('successMessage');
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Enviando...';
-
-            const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                if (response.status == 200) {
-                    formWrapper.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    
-                    // Auto close after 5 seconds
-                    setTimeout(() => {
-                        if (document.getElementById('contactModal').classList.contains('active')) {
-                            toggleModal();
-                        }
-                    }, 5000);
-                } else {
-                    let json = await response.json();
-                    alert("Error: " + json.message);
-                }
-            })
-            .catch(error => {
-                alert("Algo salió mal. Por favor intenta de nuevo.");
-            })
-            .then(function() {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Enviar Mensaje';
-            });
-        });
 
         // --- Slider Logic ---
         const sliderInput = document.getElementById('sliderInput');
