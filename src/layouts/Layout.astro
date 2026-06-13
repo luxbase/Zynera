@@ -1,0 +1,131 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Transformamos propiedades en anuncios profesionales que generan más interés usando staging digital y fotografía profesional en Paraguay." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'><path d='M10 30V10H30' stroke='%23e8c27a' stroke-width='4' stroke-linecap='square'/><path d='M30 15H15V30' stroke='%23e8c27a' stroke-width='2.5' stroke-linecap='square'/><path d='M20 25V20H25' stroke='%23e8c27a' stroke-width='1.5' stroke-linecap='square'/></svg>" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--bg-color: #0f0f0f;
+		--accent-color: #e8c27a;
+		--accent-hover: #d4ae65;
+		--text-main: #ffffff;
+		--text-dim: #a0a0a0;
+		--card-bg: #1a1a1a;
+		--whatsapp-green: #25D366;
+		--transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		background-color: var(--bg-color);
+		color: var(--text-main);
+		font-family: 'DM Sans', sans-serif;
+		line-height: 1.6;
+		overflow-x: hidden;
+	}
+
+	h1, h2, h3 {
+		font-family: 'Playfair Display', serif;
+		font-weight: 600;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	.section-padding {
+		padding: 100px 0;
+	}
+
+	.section-header {
+		margin-bottom: 60px;
+	}
+
+	.section-header h2 {
+		font-size: 2.5rem;
+		margin-bottom: 16px;
+	}
+
+	.section-header p {
+		color: var(--text-dim);
+		max-width: 600px;
+	}
+
+	/* --- Animations --- */
+	.reveal {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: var(--transition-smooth);
+	}
+
+	.reveal.active {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (max-width: 768px) {
+		.section-header h2 { font-size: 2rem; }
+	}
+</style>
+
+<script>
+	// --- Scroll Reveal ---
+	const revealElements = document.querySelectorAll('.reveal');
+	const revealOnScroll = () => {
+		revealElements.forEach(el => {
+			const rect = el.getBoundingClientRect();
+			if (rect.top < window.innerHeight * 0.85) {
+				el.classList.add('active');
+			}
+		});
+	};
+
+	window.addEventListener('scroll', revealOnScroll);
+	window.addEventListener('load', revealOnScroll);
+
+	// Smooth Scroll
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function (e) {
+			const href = this.getAttribute('href');
+			if (href && href.startsWith('#')) {
+				e.preventDefault();
+				const target = document.querySelector(href);
+				if (target) {
+					target.scrollIntoView({
+						behavior: 'smooth'
+					});
+				}
+			}
+		});
+	});
+</script>

@@ -1,0 +1,53 @@
+---
+---
+<section class="hero reveal">
+    <div class="container">
+        <h1>Tus propiedades, irresistibles. <br/>En 48 horas.</h1>
+        <p>Fotografía profesional y decoración virtual diseñada para atraer más consultas y acelerar el proceso de venta.</p>
+
+        <div class="hero-visual">
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        padding: 160px 0 100px;
+        text-align: center;
+        position: relative;
+        background: radial-gradient(circle at center, rgba(232, 194, 122, 0.05) 0%, transparent 70%);
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.1;
+        margin-bottom: 24px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero p {
+        color: var(--text-dim);
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 40px;
+    }
+
+    .hero-visual {
+        margin-top: 60px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        aspect-ratio: 16/9;
+        background: url('/images/despues.png') center/cover no-repeat;
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 2.5rem; }
+    }
+</style>

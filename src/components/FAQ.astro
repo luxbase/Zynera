@@ -1,0 +1,97 @@
+---
+---
+<section id="faq" class="section-padding reveal">
+    <div class="container" style="max-width: 800px;">
+        <div class="section-header">
+            <h2>Preguntas Frecuentes</h2>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Tengo que mover muebles o decorar la propiedad? <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+                No es necesario. Nosotros capturamos el espacio tal cual está y luego realizamos la decoración virtual sobre la imagen real en post-producción.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿En cuánto tiempo recibo el material final? <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+                Nuestro compromiso de entrega es de 48 horas hábiles después de realizada la sesión de fotos en la propiedad.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Llegan a todo el país? <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+                Actualmente cubrimos Gran Asunción, proximamente Ciudad del Este y Encarnación. Consultanos por disponibilidad y viáticos para otras zonas de Paraguay.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Qué estilos de decoración utilizan? <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+                Contamos con catálogos modernos, industriales y clásicos. Seleccionamos el estilo que mejor se adapte al perfil del comprador ideal para esa zona.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Las fotos sirven para portales y redes sociales? <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+                Sí. Todo el material se entrega en alta resolución para portales y optimizado para Instagram, TikTok y Facebook.
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .faq-item {
+        background: var(--card-bg);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 24px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 700;
+    }
+
+    .faq-answer {
+        padding: 0 24px 24px;
+        color: var(--text-dim);
+        display: none;
+    }
+
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+
+    .faq-toggle {
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+        transform: rotate(180deg);
+    }
+</style>
+
+<script>
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question?.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            faqItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+    });
+</script>

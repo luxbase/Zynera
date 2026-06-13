@@ -1,0 +1,102 @@
+---
+---
+<header>
+    <div class="container nav">
+        <a href="/" class="logo">
+            <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
+                <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
+                <path d="M20 25V20H25" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+            <span class="logo-text">Zynera</span>
+        </a>
+        <div class="header-actions">
+            <button class="btn-contact" id="openContact">Contactanos</button>
+            <a href="https://wa.me/595981123456?text=Hola%20Zynera!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital." class="btn-whatsapp">WhatsApp</a>
+        </div>
+    </div>
+</header>
+
+<style>
+    header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(15, 15, 15, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logo-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--accent-color);
+        letter-spacing: 4px;
+        text-transform: none;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-contact {
+        background: transparent;
+        border: 1px solid var(--accent-color);
+        color: var(--accent-color);
+        padding: 8px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: var(--transition-smooth);
+        cursor: pointer;
+    }
+
+    .btn-contact:hover {
+        background: var(--accent-color);
+        color: var(--bg-color);
+    }
+
+    .btn-whatsapp {
+        background-color: var(--whatsapp-green);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition-smooth);
+    }
+</style>
+
+<script>
+    document.getElementById('openContact')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('toggle-modal'));
+    });
+</script>

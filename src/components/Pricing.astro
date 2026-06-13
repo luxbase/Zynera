@@ -1,0 +1,117 @@
+---
+---
+<section id="servicios" class="section-padding reveal">
+    <div class="container">
+        <div class="section-header">
+            <h2>Planes diseñados para vender</h2>
+            <p>Desde departamentos compactos hasta residencias de lujo.</p>
+        </div>
+        <div class="services-grid">
+            <div class="pricing-card">
+                <span class="tier-name">BÁSICO</span>
+                <div class="tier-price">$75 <span>/ Propiedad</span></div>
+                <ul class="tier-features">
+                    <li>Fotografía profesional</li>
+                    <li>Edición avanzada de luz</li>
+                    <li>Entrega en 48hs</li>
+                    <li>Ideal para alquileres</li>
+                </ul>
+            </div>
+            <div class="pricing-card popular">
+                <span class="tier-name">PREMIUM</span>
+                <div class="tier-price">$180 <span>/ Propiedad</span></div>
+                <ul class="tier-features">
+                    <li>Fotografía profesional</li>
+                    <li>Decoración virtual (Social)</li>
+                    <li>Reel para Instagram/TikTok</li>
+                    <li>Entrega en 48hs</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <span class="tier-name">ELITE</span>
+                <div class="tier-price">$380 <span>/ Propiedad</span></div>
+                <ul class="tier-features">
+                    <li>Cobertura total</li>
+                    <li>Staging virtual completo</li>
+                    <li>Tomas con Drone</li>
+                    <li>Página web propia</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 32px;
+    }
+
+    .pricing-card {
+        background: var(--card-bg);
+        padding: 48px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pricing-card.popular {
+        border-color: var(--accent-color);
+    }
+
+    .pricing-card.popular::before {
+        content: "MÁS ELEGIDO";
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        background: var(--accent-color);
+        color: var(--bg-color);
+        font-size: 0.7rem;
+        font-weight: 800;
+        padding: 4px 40px;
+        transform: rotate(45deg);
+    }
+
+    .tier-name {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        color: var(--accent-color);
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+
+    .tier-price {
+        font-size: 3rem;
+        margin-bottom: 32px;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .tier-price span {
+        font-size: 1rem;
+        color: var(--text-dim);
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .tier-features {
+        list-style: none;
+        flex-grow: 1;
+    }
+
+    .tier-features li {
+        margin-bottom: 16px;
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tier-features li::before {
+        content: "✓";
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+</style>
