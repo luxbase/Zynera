@@ -1,6 +1,5 @@
 ---
 ---
-
 <section id="proceso" class="section-padding reveal">
     <div class="container">
         <div class="section-header" style="text-align: center;">
@@ -8,32 +7,24 @@
         </div>
         <div class="process-row">
             <div class="process-step">
-                <div class="step-circle">
-                    <span class="step-num">1</span>
-                </div>
+                <div class="step-number">1</div>
                 <h3>Agendamos</h3>
                 <p>Coordinamos la visita a la propiedad en el horario que mejor te quede.</p>
             </div>
             <div class="process-step">
-                <div class="step-circle">
-                    <span class="step-num">2</span>
-                </div>
+                <div class="step-number">2</div>
                 <h3>Capturamos</h3>
-                <p>Fotograf&iacute;a profesional de alta gama usando equipo de &uacute;ltima generaci&oacute;n.</p>
+                <p>Fotografía profesional de alta gama usando equipo de última generación.</p>
             </div>
             <div class="process-step">
-                <div class="step-circle">
-                    <span class="step-num">3</span>
-                </div>
+                <div class="step-number">3</div>
                 <h3>Transformamos</h3>
-                <p>Nuestra tecnolog&iacute;a de staging digital decora los espacios vac&iacute;os con estilo.</p>
+                <p>Nuestra tecnología de staging digital decora los espacios vacíos con estilo.</p>
             </div>
             <div class="process-step">
-                <div class="step-circle">
-                    <span class="step-num">4</span>
-                </div>
-                <h3>Recib&iacute;s</h3>
-                <p>En menos de 48hs ten&eacute;s todo el material listo para publicar y vender.</p>
+                <div class="step-number">4</div>
+                <h3>Recibís</h3>
+                <p>En menos de 48hs tenés todo el material listo para publicar y vender.</p>
             </div>
         </div>
     </div>
@@ -43,73 +34,26 @@
     .process-row {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 24px;
+        gap: 48px;
         position: relative;
     }
 
     .process-step {
         text-align: center;
         position: relative;
-        padding: 0 16px;
     }
 
-    .process-step::before {
-        content: '';
-        position: absolute;
-        top: 25px;
-        right: calc(50% + 32px);
-        left: calc(-50% + 32px);
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(232, 194, 122, 0.2), transparent);
-    }
-
-    .process-step:first-child::before {
-        display: none;
-    }
-
-    .process-step h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 700;
-    }
-
-    .process-step p {
-        color: var(--text-dim);
-        font-size: 0.9rem;
-        line-height: 1.7;
-        max-width: 260px;
-        margin: 0 auto;
-    }
-
-    .step-circle {
+    .step-number {
         width: 50px;
         height: 50px;
+        background: var(--accent-color);
+        color: var(--bg-color);
         border-radius: 50%;
-        background: transparent;
-        border: 2px solid var(--accent-color);
         display: flex;
         align-items: center;
         justify-content: center;
+        font-weight: 800;
         margin: 0 auto 24px;
-        position: relative;
-        z-index: 1;
-    }
-
-    .step-num {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--accent-color);
-        font-family: 'DM Sans', sans-serif;
-    }
-
-    @media (max-width: 768px) {
-        .process-row {
-            gap: 48px;
-        }
-
-        .process-step::before {
-            display: none;
-        }
+        font-size: 1.2rem;
     }
 </style>

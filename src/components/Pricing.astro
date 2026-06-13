@@ -1,35 +1,31 @@
 ---
-const baseUrl = import.meta.env.BASE_URL;
 ---
-
 <section id="servicios" class="section-padding reveal">
     <div class="container">
         <div class="section-header">
-            <h2>Planes dise&ntilde;ados para vender</h2>
+            <h2>Planes diseñados para vender</h2>
             <p>Desde departamentos compactos hasta residencias de lujo.</p>
         </div>
-        <div class="pricing-grid">
+        <div class="services-grid">
             <div class="pricing-card">
-                <span class="tier-name">B&Aacute;SICO</span>
+                <span class="tier-name">BÁSICO</span>
                 <div class="tier-price">$75 <span>/ Propiedad</span></div>
                 <ul class="tier-features">
-                    <li>Fotograf&iacute;a profesional</li>
-                    <li>Edici&oacute;n avanzada de luz</li>
+                    <li>Fotografía profesional</li>
+                    <li>Edición avanzada de luz</li>
                     <li>Entrega en 48hs</li>
                     <li>Ideal para alquileres</li>
                 </ul>
-                <button class="btn-plan" data-plan="basico">Elegir plan</button>
             </div>
             <div class="pricing-card popular">
                 <span class="tier-name">PREMIUM</span>
                 <div class="tier-price">$180 <span>/ Propiedad</span></div>
                 <ul class="tier-features">
-                    <li>Fotograf&iacute;a profesional</li>
-                    <li>Decoraci&oacute;n virtual (Social)</li>
+                    <li>Fotografía profesional</li>
+                    <li>Decoración virtual (Social)</li>
                     <li>Reel para Instagram/TikTok</li>
                     <li>Entrega en 48hs</li>
                 </ul>
-                <button class="btn-plan" data-plan="premium">Elegir plan</button>
             </div>
             <div class="pricing-card">
                 <span class="tier-name">ELITE</span>
@@ -38,16 +34,15 @@ const baseUrl = import.meta.env.BASE_URL;
                     <li>Cobertura total</li>
                     <li>Staging virtual completo</li>
                     <li>Tomas con Drone</li>
-                    <li>P&aacute;gina web propia</li>
+                    <li>Página web propia</li>
                 </ul>
-                <button class="btn-plan" data-plan="elite">Elegir plan</button>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-    .pricing-grid {
+    .services-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 32px;
@@ -57,17 +52,11 @@ const baseUrl = import.meta.env.BASE_URL;
         background: var(--card-bg);
         padding: 48px;
         border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
         flex-direction: column;
         position: relative;
         overflow: hidden;
-        transition: var(--transition-smooth);
-    }
-
-    .pricing-card:hover {
-        border-color: rgba(255, 255, 255, 0.08);
-        transform: translateY(-4px);
     }
 
     .pricing-card.popular {
@@ -75,7 +64,7 @@ const baseUrl = import.meta.env.BASE_URL;
     }
 
     .pricing-card.popular::before {
-        content: "M&Aacute;S ELEGIDO";
+        content: "MÁS ELEGIDO";
         position: absolute;
         top: 20px;
         right: -30px;
@@ -85,12 +74,11 @@ const baseUrl = import.meta.env.BASE_URL;
         font-weight: 800;
         padding: 4px 40px;
         transform: rotate(45deg);
-        letter-spacing: 1px;
     }
 
     .tier-name {
-        font-size: 0.85rem;
-        letter-spacing: 3px;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
         color: var(--accent-color);
         margin-bottom: 16px;
         font-weight: 700;
@@ -106,68 +94,24 @@ const baseUrl = import.meta.env.BASE_URL;
         font-size: 1rem;
         color: var(--text-dim);
         font-family: 'DM Sans', sans-serif;
-        font-weight: 400;
     }
 
     .tier-features {
         list-style: none;
         flex-grow: 1;
-        margin-bottom: 32px;
     }
 
     .tier-features li {
-        margin-bottom: 14px;
+        margin-bottom: 16px;
         color: var(--text-dim);
         display: flex;
         align-items: center;
         gap: 12px;
-        font-size: 0.95rem;
     }
 
     .tier-features li::before {
-        content: "";
-        width: 6px;
-        height: 6px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
-    .btn-plan {
-        width: 100%;
-        padding: 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: transparent;
-        color: var(--text-main);
-        font-size: 0.9rem;
-        font-weight: 600;
-        font-family: 'DM Sans', sans-serif;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-    }
-
-    .btn-plan:hover {
-        background: var(--accent-color);
-        color: var(--bg-color);
-        border-color: var(--accent-color);
-    }
-
-    .pricing-card.popular .btn-plan {
-        background: var(--accent-color);
-        color: var(--bg-color);
-        border-color: var(--accent-color);
-    }
-
-    .pricing-card.popular .btn-plan:hover {
-        background: var(--accent-hover);
+        content: "✓";
+        color: var(--accent-color);
+        font-weight: bold;
     }
 </style>
-
-<script>
-    document.querySelectorAll('.btn-plan').forEach(btn => {
-        btn.addEventListener('click', () => {
-            window.dispatchEvent(new CustomEvent('toggle-modal'));
-        });
-    });
-</script>
