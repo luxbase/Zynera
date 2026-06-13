@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="¡Solicitud enviada! — Zynera Staging Digital">
+    <main class="gracias">
+        <div class="card">
+            <div class="icon">&#10003;</div>
+            <h1>¡Solicitud enviada!</h1>
+            <p>Recibimos tu información. Te contactaremos pronto para empezar con el staging digital de tu propiedad.</p>
+            <a href="/Zynera/" class="btn">Volver al inicio</a>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .gracias {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+    }
+    .card {
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px;
+        padding: 60px 40px;
+        max-width: 480px;
+        width: 100%;
+        text-align: center;
+    }
+    .icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #e8c27a;
+        color: #0f0f0f;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+    p {
+        color: #a0a0a0;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+    .btn {
+        display: inline-block;
+        background: #e8c27a;
+        color: #0f0f0f;
+        padding: 14px 36px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    .btn:hover {
+        background: #d4ae65;
+    }
+</style>
