@@ -1,24 +1,30 @@
 ---
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 const baseUrl = import.meta.env.BASE_URL;
 
 const styles = [
-    { id: 'mediterraneo', label: 'Mediterráneo', img: `${baseUrl}images/Mediterraneo.webp` },
-    { id: 'manhattan', label: 'Manhattan', img: `${baseUrl}images/Manhattan.webp` },
-    { id: 'minimalist', label: 'Minimalista', img: `${baseUrl}images/Minimalist.webp` },
+    { id: 'mediterraneo', label: dict.comparison.styles[0], img: `${baseUrl}images/Mediterraneo.webp` },
+    { id: 'manhattan', label: dict.comparison.styles[1], img: `${baseUrl}images/Manhattan.webp` },
+    { id: 'minimalist', label: dict.comparison.styles[2], img: `${baseUrl}images/Minimalist.webp` },
 ];
 const beforeImg = `${baseUrl}images/antes.webp`;
 ---
 <section class="hero reveal">
     <div class="container">
         <div class="hero-content">
-            <h1>Aumenta el valor percibido de cada propiedad.</h1>
-            <p>Fotos mejoradas, texto sin errores y ambientes decorados digitalmente en 24 horas — para que tu propiedad venda sola.</p>
-            <button class="hero-cta" id="heroCtaBtn" type="button">Mejorar mi publicación →</button>
+            <h1>{dict.hero.h1}</h1>
+            <p>{dict.hero.p}</p>
+            <button class="hero-cta" id="heroCtaBtn" type="button">{dict.hero.cta}</button>
         </div>
         <section id="resultados" class="section-padding">
             <div class="container">
                 <div class="section-header">
-                    <h2>Visualizá el impacto</h2>
+                    <h2>{dict.comparison.heading}</h2>
                 </div>
                 <div class="comp-card" id="compCard">
                     <div class="tabs">
@@ -31,7 +37,7 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                     <div class="slider-container" id="sliderContainer">
                         <div class="slider-half img-before">
                             <img src={beforeImg} alt="Original sin staging" loading="eager" decoding="async" />
-                            <span class="tag">Original</span>
+                            <span class="tag">{dict.comparison.original}</span>
                         </div>
                         <div class="slider-half img-after" id="afterHalf">
                             {styles.map((s, i) => (
@@ -45,7 +51,7 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                                     style={{ display: i === 0 ? '' : 'none' }}
                                 />
                             ))}
-                            <span class="tag tag-after">Staging</span>
+                            <span class="tag tag-after">{dict.comparison.staging}</span>
                         </div>
                         <div class="slider-handle" id="sliderHandle">
                             <div class="handle-circle"></div>

@@ -1,38 +1,39 @@
 ---
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
+const WHATSAPP_URL = "https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20contratar%20el%20plan";
+const coldStartWa = "https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20reclamar%20mi%20primer%20listing%20gratis.";
 ---
 <section id="servicios" class="section-padding reveal">
     <div class="container">
         <div class="section-header">
-            <h2>Elegí tu modo</h2>
-            <p>Dos formas de mejorar tu listing. Sin visitas, sin fotógrafo.</p>
+            <h2>{dict.pricing.heading}</h2>
+            <p>{dict.pricing.p}</p>
         </div>
         <div class="services-grid">
-            <div class="pricing-card">
-                <span class="tier-name">BÁSICO</span>
-                <div class="tier-price">$49 <span>/ propiedad</span></div>
-                <ul class="tier-features">
-                    <li>Nos enviás las fotos o las bajamos del portal</li>
-                    <li>Corregimos color, luz y nitidez</li>
-                    <li>Amoblamos virtualmente la propiedad</li>
-                    <li>Reescribimos la descripción</li>
-                    <li>Recibís el ZIP listo para publicar</li>
-                </ul>
-            </div>
-            <div class="pricing-card popular">
-                <span class="tier-name">EMPRESARIAL</span>
-                <div class="tier-price">$79 <span>/ propiedad</span></div>
-                <ul class="tier-features">
-                    <li>Nos das acceso al portal</li>
-                    <li>Corregimos color, luz y nitidez</li>
-                    <li>Amoblamos virtualmente la propiedad</li>
-                    <li>Reescribimos la descripción</li>
-                    <li>Editamos la publicación completa</li>
-                </ul>
-            </div>
+            {dict.pricing.cards.map((card, i) => (
+                <div class={`pricing-card${card.popular ? ' popular' : ''}`}>
+                    {card.popular && <span class="badge">{dict.pricing.popularBadge}</span>}
+                    <span class="tier-name">{card.name}</span>
+                    <div class="tier-price">{card.price} <span>{card.per}</span></div>
+                    <ul class="tier-features">
+                        {card.features.map(f => <li>{f}</li>)}
+                    </ul>
+                </div>
+            ))}
         </div>
-        <p class="payment-note">Pagás en guaraníes o transferencia &middot; Consultanos por combos de 3+ propiedades</p>
+        <p class="payment-note">{dict.pricing.paymentNote}</p>
         <div class="pricing-cta">
-            <button class="btn-pricing-cta" id="pricingCtaBtn" type="button">Mejorar mi publicación →</button>
+            <button class="btn-pricing-cta" id="pricingCtaBtn" type="button">{dict.pricing.cta}</button>
+        </div>
+        <div class="cold-start">
+            <p class="cold-start-title">&#9733; {dict.pricing.coldStart.title}</p>
+            <p class="cold-start-desc">{dict.pricing.coldStart.desc} <a href={coldStartWa} target="_blank" rel="noopener">{dict.pricing.coldStart.cta}</a></p>
+            <p class="cold-start-referral">{dict.pricing.coldStart.referral}</p>
         </div>
     </div>
 </section>
@@ -61,8 +62,7 @@
         border-color: var(--accent-color);
     }
 
-    .pricing-card.popular::before {
-        content: "RECOMENDADO";
+    .badge {
         position: absolute;
         top: 30px;
         right: -45px;
@@ -142,6 +142,42 @@
 
     .btn-pricing-cta:hover {
         opacity: 0.9;
+    }
+
+    .cold-start {
+        text-align: center;
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cold-start-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        color: var(--accent-color);
+        margin-bottom: 12px;
+    }
+
+    .cold-start-desc {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .cold-start-desc a {
+        color: var(--accent-color);
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .cold-start-desc a:hover {
+        text-decoration: underline;
+    }
+
+    .cold-start-referral {
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        opacity: 0.8;
     }
 </style>
 

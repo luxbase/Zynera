@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import Pricing from '../../components/Pricing.astro';
+import Process from '../../components/Process.astro';
+import FAQ from '../../components/FAQ.astro';
+import Footer from '../../components/Footer.astro';
+import ContactModal from '../../components/ContactModal.astro';
+type Lang = 'es' | 'en' | 'pt';
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'es' } },
+        { params: { lang: 'en' } },
+        { params: { lang: 'pt' } },
+    ];
+}
+const { lang } = Astro.params as { lang: Lang };
+---
+
+<Layout lang={lang} title={undefined}>
+	<Header lang={lang} />
+	<main>
+		<Hero lang={lang} />
+		<Features lang={lang} />
+		<Pricing lang={lang} />
+		<Process lang={lang} />
+		<FAQ lang={lang} />
+	</main>
+	<Footer lang={lang} />
+	<ContactModal lang={lang} />
+</Layout>

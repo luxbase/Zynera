@@ -1,27 +1,25 @@
 ---
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 ---
 <section class="section-padding reveal">
     <div class="container">
         <div class="section-header">
-            <h2>Por qué el marketing visual importa</h2>
-            <p>En un mercado saturado, la primera impresión es digital. No dejes que una mala foto detenga tu venta.</p>
+            <h2>{dict.features.heading}</h2>
+            <p>{dict.features.p}</p>
         </div>
         <div class="problem-grid">
-            <div class="problem-card">
-                <span class="icon">👁️</span>
-                <h3>La primera impresión es digital</h3>
-                <p>La mayoría de los compradores empieza en portales. Si la foto no impacta hoy, probablemente no haya visita mañana.</p>
-            </div>
-            <div class="problem-card">
-                <span class="icon">⏱️</span>
-                <h3>Más consultas, menos tiempo en venta</h3>
-                <p>Vimos que las propiedades con staging digital reciben más consultas y tienden a venderse más rápido que aquellas con fotos comunes.</p>
-            </div>
-            <div class="problem-card">
-                <span class="icon">⭐</span>
-                <h3>Captaciones con exclusividad</h3>
-                <p>Ofrecer marketing visual premium te posiciona como un agente de élite, facilitando la firma de nuevas exclusividades.</p>
-            </div>
+            {dict.features.cards.map(card => (
+                <div class="problem-card">
+                    <span class="icon">{card.icon}</span>
+                    <h3>{card.title}</h3>
+                    <p>{card.text}</p>
+                </div>
+            ))}
         </div>
     </div>
 </section>
