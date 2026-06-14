@@ -25,11 +25,11 @@ import ContactModal from '../components/ContactModal.astro';
 
 <script>
 	const supported = ['es', 'en', 'pt'];
-	const stored = localStorage.getItem('zynera-lang');
+	const stored = localStorage.getItem('qualis-lang');
 	const nav = (navigator.language ?? navigator.languages?.[0] ?? 'es').slice(0, 2);
 	const detected = stored ?? nav;
 	const lang = supported.includes(detected) ? detected : 'es';
-	localStorage.setItem('zynera-lang', lang);
+	localStorage.setItem('qualis-lang', lang);
 	if (!window.location.pathname.includes(`/${lang}/`)) {
 		window.location.replace(`${import.meta.env.BASE_URL}${lang}/`);
 	}

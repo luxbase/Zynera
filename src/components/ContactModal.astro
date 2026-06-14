@@ -6,12 +6,12 @@ interface Props { lang: Lang }
 
 const { lang } = Astro.props;
 const dict = t(lang);
-const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
+const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqe12stc0006sp211lp2fa2e";
 const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 const s = dict.modal.steps;
 ---
 
-<div class="modal" id="zyneraModal" role="dialog" aria-modal="true" aria-hidden="true">
+<div class="modal" id="qualisModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <span class="modal-title">{dict.modal.title}</span>
@@ -93,7 +93,7 @@ const s = dict.modal.steps;
                     </label>
                     <label class="consent-label">
                         <input type="checkbox" name="Consentimiento" value="Acepto" required>
-                        <span>{s[3].privacyConsent} <a href="/Zynera/privacidad" target="_blank" rel="noopener">({s[3].privacyLink})</a></span>
+                        <span>{s[3].privacyConsent} <a href={`${import.meta.env.BASE_URL}privacidad`} target="_blank" rel="noopener">({s[3].privacyLink})</a></span>
                     </label>
                 </div>
             </div>
@@ -670,7 +670,7 @@ const s = dict.modal.steps;
 </style>
 
 <style is:global>
-    body.modal-open-zynera { overflow: hidden; }
+    body.modal-open-qualis { overflow: hidden; }
 </style>
 
 <script define:vars={{
@@ -683,7 +683,7 @@ const s = dict.modal.steps;
     PHOTO_ERROR_SIZE: s[2].photoErrorSize,
     WA_MESSAGE_TEMPLATE: dict.modal.success.waMessage,
 }}>
-    const MODAL = document.getElementById('zyneraModal');
+    const MODAL = document.getElementById('qualisModal');
     const FORM = document.getElementById('wizardForm');
     const FORM_WRAPPER = FORM;
     const LOADING = document.getElementById('loadingContainer');
@@ -729,7 +729,7 @@ const s = dict.modal.steps;
         resetWizard();
         MODAL?.classList.add('active');
         MODAL?.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open-zynera');
+        document.body.classList.add('modal-open-qualis');
         setTimeout(() => {
             const first = getFocusable(MODAL)[0];
             if (first) first.focus();
@@ -740,7 +740,7 @@ const s = dict.modal.steps;
     function closeModal() {
         MODAL?.classList.remove('active');
         MODAL?.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open-zynera');
+        document.body.classList.remove('modal-open-qualis');
         document.removeEventListener('keydown', trapFocus);
         if (triggerEl) setTimeout(() => triggerEl.focus(), 50);
     }

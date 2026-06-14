@@ -2,13 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout lang="es" title="¡Solicitud enviada! — Zynera Staging Digital">
+<Layout lang="es" title="¡Solicitud enviada! — Qualis Studio">
     <main class="gracias">
         <div class="card">
             <div class="icon">&#10003;</div>
             <h1>¡Solicitud enviada!</h1>
             <p>Recibimos tu información. Te contactaremos pronto para empezar con el staging digital de tu propiedad.</p>
-            <a href="/Zynera/" class="btn">Volver al inicio</a>
+            <a href={import.meta.env.BASE_URL} class="btn">Volver al inicio</a>
         </div>
     </main>
 </Layout>
