@@ -147,8 +147,8 @@ export default {
         nameError: 'Mínimo 2 caracteres',
         modeLabel: '¿Qué modo preferís?',
         modes: [
-          { value: 'Handoff', label: 'Handoff', desc: 'Nos enviás las fotos, te devolvemos el staging' },
-          { value: 'Done-for-you', label: 'Done-for-you', desc: 'Nos das acceso al portal y lo editamos por vos · No guardamos credenciales' },
+          { value: 'Handoff', label: 'Básico', desc: 'Nos enviás las fotos, te devolvemos el staging' },
+          { value: 'Done-for-you', label: 'Empresarial', desc: 'Nos das acceso al portal y lo editamos por vos · No guardamos credenciales' },
         ],
       },
       {
