@@ -38,7 +38,7 @@ La arquitectura prevista para la plataforma multi-tenant incluye:
 
 ```text
 /src
-  /components  # UI (Hero, BeforeAfterSlider, FAQ, ContactModal, etc.)
+  /components  # UI (Hero, Comparison, FAQ, ContactModal, etc.)
   /layouts     # Layout base y estilos globales
   /pages       # Rutas (index, privacidad)
   constants.ts # Configuración central (WhatsApp, etc.)

@@ -554,7 +554,7 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
     body.modal-open-zynera { overflow: hidden; }
 </style>
 
-<script>
+<script define:vars={{ SUBMITKIT_URL }}>
     const MODAL = document.getElementById('zyneraModal');
     const FORM = document.getElementById('wizardForm');
     const FORM_WRAPPER = FORM;
@@ -777,7 +777,7 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         fd.append('Consentimiento', 'Acepto');
 
         try {
-            await fetch('https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e', {
+            await fetch(SUBMITKIT_URL, {
                 method: 'POST',
                 body: fd,
                 mode: 'no-cors',
