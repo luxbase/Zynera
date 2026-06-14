@@ -136,7 +136,8 @@ export default {
     cta: 'Mejorar mi publicación →',
   },
   modal: {
-    title: 'Mejorar mi publicación',
+    title: 'Solicitá tu muestra gratis de staging',
+    description: 'Enviános las fotos de tu propiedad y crearemos una imagen con staging profesional sin costo. Revisaremos tu solicitud y te contactaremos personalmente para analizar las mejores opciones para tu publicación.',
     closeLabel: 'Cerrar',
     stepIndicator: 'Paso {n} de 4',
     steps: [
@@ -146,8 +147,8 @@ export default {
         nameError: 'Mínimo 2 caracteres',
         modeLabel: '¿Qué modo preferís?',
         modes: [
-          { value: 'Handoff', label: 'Handoff — $49', desc: 'Mandás tus fotos, te devolvemos el ZIP' },
-          { value: 'Done-for-you', label: 'Done-for-you — $79', desc: 'Nos das acceso al portal y lo editamos por vos · No guardamos credenciales' },
+          { value: 'Handoff', label: 'Handoff', desc: 'Nos enviás las fotos, te devolvemos el staging' },
+          { value: 'Done-for-you', label: 'Done-for-you', desc: 'Nos das acceso al portal y lo editamos por vos · No guardamos credenciales' },
         ],
       },
       {
@@ -165,7 +166,7 @@ export default {
         photoErrorSize: 'Máximo 5 MB',
       },
       {
-        styleLabel: 'Estilo deseado',
+        styleLabel: 'Estilo de muestra',
         styles: ['Mediterráneo', 'Manhattan', 'Minimalista'],
         credConsent: 'Entiendo que Zynera usará mis credenciales solo para editar esta publicación y las eliminará al finalizar.',
         privacyConsent: 'Acepto la política de privacidad',
@@ -174,13 +175,13 @@ export default {
     ],
     back: 'Atrás',
     next: 'Siguiente',
-    submit: 'Enviar solicitud',
+    submit: 'Solicitar muestra gratis',
     loading: 'Enviando solicitud...',
     success: {
-      title: '¡Solicitud enviada!',
-      text: 'Recibimos tu solicitud. Te escribimos al WhatsApp en las próximas 2 horas. Si no recibís respuesta, escribinos directo.',
+      title: '¡Solicitud recibida!',
+      text: 'Recibimos tu solicitud. Te contactaremos pronto para coordinar tu muestra gratis. Si no recibís respuesta en 24 horas, escribinos directo.',
       waCta: 'Escribinos por WhatsApp →',
-      waMessage: 'Hola Zynera! Soy {name}. Quiero contratar el plan {mode} para mejorar mi publicación.',
+      waMessage: 'Hola Zynera! Soy {name}. Envié mi solicitud de muestra gratis de staging.',
       newRequest: 'Nueva solicitud',
     },
     error: {

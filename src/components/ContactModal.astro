@@ -18,6 +18,8 @@ const s = dict.modal.steps;
             <button class="modal-close" id="closeModal" type="button" aria-label={dict.modal.closeLabel}>&times;</button>
         </div>
 
+        <p class="modal-desc">{dict.modal.description}</p>
+
         <div class="step-indicator" id="stepIndicator">
             <div class="step-dot active" data-step="1" aria-label={dict.modal.stepIndicator.replace('{n}', '1')} role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">1</div>
             <div class="step-line" aria-hidden="true"></div>
@@ -169,6 +171,13 @@ const s = dict.modal.steps;
         font-weight: 600;
         color: #e8c27a;
         letter-spacing: 0.02em;
+    }
+
+    .modal-desc {
+        font-size: 0.85rem;
+        color: var(--text-dim);
+        line-height: 1.55;
+        padding: 12px 20px 0;
     }
 
     .modal-close {

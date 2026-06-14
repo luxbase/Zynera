@@ -136,7 +136,8 @@ export default {
     cta: 'Improve my listing →',
   },
   modal: {
-    title: 'Improve my listing',
+    title: 'Get a Free Virtual Staging Sample',
+    description: 'Send us your property photos and we\'ll create one professionally staged image at no cost. We\'ll review your request and contact you personally to discuss the best options for your listing.',
     closeLabel: 'Close',
     stepIndicator: 'Step {n} of 4',
     steps: [
@@ -146,8 +147,8 @@ export default {
         nameError: 'Minimum 2 characters',
         modeLabel: 'Which mode do you prefer?',
         modes: [
-          { value: 'Handoff', label: 'Handoff — $49', desc: 'You send photos, we return the ZIP' },
-          { value: 'Done-for-you', label: 'Done-for-you — $79', desc: 'Give us portal access and we edit it for you · We do not store credentials' },
+          { value: 'Handoff', label: 'Handoff', desc: 'You send photos, we return the staging' },
+          { value: 'Done-for-you', label: 'Done-for-you', desc: 'Give us portal access and we edit it for you · We do not store credentials' },
         ],
       },
       {
@@ -165,7 +166,7 @@ export default {
         photoErrorSize: 'Maximum 5 MB',
       },
       {
-        styleLabel: 'Desired style',
+        styleLabel: 'Sample style',
         styles: ['Mediterranean', 'Manhattan', 'Minimalist'],
         credConsent: 'I understand that Zynera will use my credentials only to edit this listing and will delete them upon completion.',
         privacyConsent: 'I accept the privacy policy',
@@ -174,13 +175,13 @@ export default {
     ],
     back: 'Back',
     next: 'Next',
-    submit: 'Send request',
+    submit: 'Request Free Sample',
     loading: 'Sending request...',
     success: {
-      title: 'Request sent!',
-      text: 'We received your request. We will message you on WhatsApp within 2 hours. If you do not hear back, contact us directly.',
-      waCta: 'Contact us on WhatsApp →',
-      waMessage: 'Hi Zynera! I am {name}. I want to hire the {mode} plan to improve my listing.',
+      title: 'Request received!',
+      text: 'We received your request. We\'ll contact you soon to coordinate your free sample. If you don\'t hear back within 24 hours, message us directly.',
+      waCta: 'Message us on WhatsApp →',
+      waMessage: 'Hi Zynera! I\'m {name}. I sent my free staging sample request.',
       newRequest: 'New request',
     },
     error: {
