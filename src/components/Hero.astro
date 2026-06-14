@@ -1,9 +1,60 @@
 ---
+const baseUrl = import.meta.env.BASE_URL;
+
+const styles = [
+    { id: 'mediterraneo', label: 'Mediterráneo', img: `${baseUrl}images/Mediterraneo.webp` },
+    { id: 'manhattan', label: 'Manhattan', img: `${baseUrl}images/Manhattan.webp` },
+    { id: 'minimalist', label: 'Minimalista', img: `${baseUrl}images/Minimalist.webp` },
+];
+const beforeImg = `${baseUrl}images/antes.webp`;
 ---
 <section class="hero reveal">
     <div class="container">
-        <h1>Tus propiedades, irresistibles. <br/>En 24 horas.</h1>
-        <p>Fotos mejoradas, texto sin errores y ambientes decorados digitalmente — para que tu propiedad venda sola.</p>
+        <div class="hero-content">
+            <h1>Aumenta el valor percibido de cada propiedad.</h1>
+            <p>Fotos mejoradas, texto sin errores y ambientes decorados digitalmente en 24 horas — para que tu propiedad venda sola.</p>
+            <button class="hero-cta" id="heroCtaBtn" type="button">Mejorar mi publicación →</button>
+        </div>
+        <section id="resultados" class="section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Visualizá el impacto</h2>
+                </div>
+                <div class="comp-card" id="compCard">
+                    <div class="tabs">
+                        {styles.map((s, i) => (
+                            <button class="tab" data-style={s.id} data-active={i === 0 ? '' : null} type="button">
+                                {s.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div class="slider-container" id="sliderContainer">
+                        <div class="slider-half img-before">
+                            <img src={beforeImg} alt="Original sin staging" loading="eager" decoding="async" />
+                            <span class="tag">Original</span>
+                        </div>
+                        <div class="slider-half img-after" id="afterHalf">
+                            {styles.map((s, i) => (
+                                <img
+                                    class="style-img"
+                                    data-style={s.id}
+                                    src={s.img}
+                                    alt={`Staging ${s.label}`}
+                                    loading={i === 0 ? 'eager' : 'lazy'}
+                                    decoding="async"
+                                    style={{ display: i === 0 ? '' : 'none' }}
+                                />
+                            ))}
+                            <span class="tag tag-after">Staging</span>
+                        </div>
+                        <div class="slider-handle" id="sliderHandle">
+                            <div class="handle-circle"></div>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="slider-input" id="sliderInput" aria-label="Comparar antes y después">
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </section>
 
@@ -13,6 +64,10 @@
         text-align: center;
         position: relative;
         background: radial-gradient(circle at center, rgba(232, 194, 122, 0.05) 0%, transparent 70%);
+    }
+
+    .hero-content {
+        margin-bottom: 48px;
     }
 
     .hero h1 {
@@ -28,7 +83,194 @@
         color: var(--text-dim);
         font-size: 1.2rem;
         max-width: 600px;
-        margin: 0 auto 40px;
+        margin: 0 auto 32px;
+    }
+
+    .hero-cta {
+        background-color: var(--accent-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .hero-cta:hover {
+        opacity: 0.9;
+    }
+
+    #resultados.section-padding {
+        padding: 0 0 60px;
+    }
+
+    #resultados .section-header {
+        margin-bottom: 32px;
+    }
+
+    #resultados .section-header h2 {
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .comp-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        max-width: 900px;
+        margin: 0 auto;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .tabs {
+        display: flex;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .tab {
+        flex: 1;
+        padding: 16px 20px;
+        background: none;
+        border: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        font-family: 'DM Sans', sans-serif;
+        color: var(--text-dim);
+        cursor: pointer;
+        position: relative;
+        transition: color 0.2s;
+    }
+
+    .tab:hover { color: var(--accent-color); }
+
+    .tab[data-active] {
+        color: var(--accent-color);
+    }
+
+    .tab[data-active]::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 24px;
+        right: 24px;
+        height: 2px;
+        background: var(--accent-color);
+        border-radius: 1px;
+    }
+
+    .slider-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1380 / 752;
+        cursor: ew-resize;
+        background: #151515;
+    }
+
+    .slider-half {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider-half img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .img-before {
+        z-index: 1;
+    }
+
+    .img-after {
+        z-index: 2;
+        clip-path: inset(0 0 0 50%);
+    }
+
+    .style-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.35s ease;
+    }
+
+    .tag {
+        position: absolute;
+        top: 16px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        background: rgba(0,0,0,0.5);
+        padding: 4px 10px;
+        border-radius: 6px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 3;
+    }
+
+    .tag-after {
+        right: 16px;
+    }
+
+    .slider-handle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: var(--accent-color);
+        z-index: 3;
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+
+    .handle-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 20px rgba(232, 194, 122, 0.4);
+    }
+
+    .handle-circle::before, .handle-circle::after {
+        content: "";
+        border: solid var(--bg-color);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 4px;
+    }
+
+    .handle-circle::before { transform: rotate(135deg); margin-right: -4px; }
+    .handle-circle::after { transform: rotate(-45deg); margin-left: -4px; }
+
+    .slider-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 4;
+        cursor: ew-resize;
     }
 
     @media (max-width: 768px) {
@@ -45,5 +287,47 @@
             font-size: 1.05rem;
             max-width: 280px;
         }
+
+        .hero-content {
+            margin-bottom: 32px;
+        }
+
+        #resultados.section-padding {
+            padding: 0 0 40px;
+        }
+
+        .tabs { padding: 0 8px; }
+        .tab { padding: 14px 8px; font-size: 0.8rem; }
     }
 </style>
+
+<script>
+    document.getElementById('heroCtaBtn')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('toggle-modal'));
+    });
+
+    const sliderInput = document.getElementById('sliderInput');
+    const afterHalf = document.getElementById('afterHalf');
+    const sliderHandle = document.getElementById('sliderHandle');
+    const tabs = document.querySelectorAll('.tab');
+    const styleImgs = document.querySelectorAll('.style-img');
+
+    if (sliderInput && afterHalf && sliderHandle) {
+        sliderInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            afterHalf.style.clipPath = `inset(0 0 0 ${val}%)`;
+            sliderHandle.style.left = `${val}%`;
+        });
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.removeAttribute('data-active'));
+            tab.setAttribute('data-active', '');
+            const style = tab.dataset.style;
+            styleImgs.forEach(img => {
+                img.style.display = img.dataset.style === style ? '' : 'none';
+            });
+        });
+    });
+</script>

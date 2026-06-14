@@ -3,40 +3,36 @@
 <section id="servicios" class="section-padding reveal">
     <div class="container">
         <div class="section-header">
-            <h2>Planes diseñados para vender</h2>
-            <p>Desde departamentos compactos hasta residencias de lujo.</p>
+            <h2>Elegí tu modo</h2>
+            <p>Dos formas de mejorar tu listing. Sin visitas, sin fotógrafo.</p>
         </div>
         <div class="services-grid">
             <div class="pricing-card">
                 <span class="tier-name">BÁSICO</span>
-                <div class="tier-price">$75 <span>/ Propiedad</span></div>
+                <div class="tier-price">$49 <span>/ propiedad</span></div>
                 <ul class="tier-features">
-                    <li>Fotografía profesional</li>
-                    <li>Edición avanzada de luz</li>
-                    <li>Entrega en 48hs</li>
-                    <li>Ideal para alquileres</li>
+                    <li>Nos enviás las fotos o las bajamos del portal</li>
+                    <li>Corregimos color, luz y nitidez</li>
+                    <li>Amoblamos virtualmente la propiedad</li>
+                    <li>Reescribimos la descripción</li>
+                    <li>Recibís el ZIP listo para publicar</li>
                 </ul>
             </div>
             <div class="pricing-card popular">
-                <span class="tier-name">PREMIUM</span>
-                <div class="tier-price">$180 <span>/ Propiedad</span></div>
+                <span class="tier-name">EMPRESARIAL</span>
+                <div class="tier-price">$79 <span>/ propiedad</span></div>
                 <ul class="tier-features">
-                    <li>Fotografía profesional</li>
-                    <li>Decoración virtual (Social)</li>
-                    <li>Reel para Instagram/TikTok</li>
-                    <li>Entrega en 48hs</li>
+                    <li>Nos das acceso al portal</li>
+                    <li>Corregimos color, luz y nitidez</li>
+                    <li>Amoblamos virtualmente la propiedad</li>
+                    <li>Reescribimos la descripción</li>
+                    <li>Editamos la publicación completa</li>
                 </ul>
             </div>
-            <div class="pricing-card">
-                <span class="tier-name">ELITE</span>
-                <div class="tier-price">$380 <span>/ Propiedad</span></div>
-                <ul class="tier-features">
-                    <li>Cobertura total</li>
-                    <li>Staging virtual completo</li>
-                    <li>Tomas con Drone</li>
-                    <li>Página web propia</li>
-                </ul>
-            </div>
+        </div>
+        <p class="payment-note">Pagás en guaraníes o transferencia &middot; Consultanos por combos de 3+ propiedades</p>
+        <div class="pricing-cta">
+            <button class="btn-pricing-cta" id="pricingCtaBtn" type="button">Mejorar mi publicación →</button>
         </div>
     </div>
 </section>
@@ -46,6 +42,8 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 32px;
+        max-width: 700px;
+        margin: 0 auto;
     }
 
     .pricing-card {
@@ -64,15 +62,16 @@
     }
 
     .pricing-card.popular::before {
-        content: "MÁS ELEGIDO";
+        content: "RECOMENDADO";
         position: absolute;
-        top: 20px;
-        right: -30px;
+        top: 30px;
+        right: -45px;
         background: var(--accent-color);
         color: var(--bg-color);
         font-size: 0.7rem;
         font-weight: 800;
-        padding: 4px 40px;
+        padding: 6px 40px;
+        line-height: 1;
         transform: rotate(45deg);
     }
 
@@ -99,6 +98,7 @@
     .tier-features {
         list-style: none;
         flex-grow: 1;
+        margin-bottom: 32px;
     }
 
     .tier-features li {
@@ -114,4 +114,39 @@
         color: var(--accent-color);
         font-weight: bold;
     }
+
+    .payment-note {
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        margin-top: 32px;
+    }
+
+    .pricing-cta {
+        text-align: center;
+        margin-top: 48px;
+    }
+
+    .btn-pricing-cta {
+        background-color: var(--accent-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-pricing-cta:hover {
+        opacity: 0.9;
+    }
 </style>
+
+<script>
+    document.getElementById('pricingCtaBtn')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('toggle-modal'));
+    });
+</script>

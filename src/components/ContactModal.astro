@@ -1,11 +1,13 @@
 ---
+import { WHATSAPP_NUMBER } from '../constants';
 const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
+const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 ---
 
 <div class="modal" id="zyneraModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="modal-title">Solicitud de Staging Digital</span>
+            <span class="modal-title">Mejorar mi publicación</span>
             <button class="modal-close" id="closeModal" type="button" aria-label="Cerrar">&times;</button>
         </div>
 
@@ -25,12 +27,31 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
                     <label class="step-label" for="name">¿Cuál es tu nombre?</label>
                     <input type="text" id="name" class="input" name="Nombre" placeholder="Tu nombre" required autocomplete="name">
                     <span class="error-msg" id="nameError"></span>
+
+                    <label class="step-label" style="margin-top: 20px;">¿Qué modo preferís?</label>
+                    <div class="mode-options">
+                        <label class="mode-option">
+                            <input type="radio" name="Modo" value="Handoff" checked>
+                            <span class="mode-label">Handoff — $49</span>
+                            <small>Mandás tus fotos, te devolvemos el ZIP</small>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="Modo" value="Done-for-you">
+                            <span class="mode-label">Done-for-you — $79</span>
+                            <small>Accedemos al portal y lo editamos por vos</small>
+                        </label>
+                    </div>
+                    <span class="error-msg" id="modeError"></span>
                 </div>
 
                 <div class="step-panel" data-step="2">
                     <label class="step-label" for="email">¿Cuál es tu email?</label>
                     <input type="email" id="email" class="input" name="Email" placeholder="tu@email.com" required autocomplete="email">
                     <span class="error-msg" id="emailError"></span>
+
+                    <label class="step-label" for="phone" style="margin-top: 20px;">WhatsApp o teléfono (opcional)</label>
+                    <input type="tel" id="phone" class="input" name="Telefono" placeholder="+595 981 123 456" autocomplete="tel">
+                    <span class="error-msg" id="phoneError"></span>
                 </div>
 
                 <div class="step-panel" data-step="3">
@@ -89,7 +110,8 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         <div id="successContainer" style="display:none">
             <div class="success-icon">&#10003;</div>
             <h2>¡Solicitud enviada!</h2>
-            <p>Recibimos tu informaci&oacute;n. Te contactaremos pronto.</p>
+            <p>Te escribimos al WhatsApp en las próximas 2 horas. Mientras tanto, prepará las fotos o el acceso al portal.</p>
+            <a class="btn-success-wa" id="successWaLink" href="#" target="_blank" rel="noopener">Escribinos por WhatsApp →</a>
             <button class="btn-new" id="btnNew" type="button">Nueva solicitud</button>
         </div>
 
@@ -261,6 +283,59 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         font-size: 0.8rem;
         color: #ff6b6b;
         min-height: 1.2em;
+    }
+
+    /* Mode selector */
+    .mode-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .mode-option {
+        flex: 1;
+        min-width: 140px;
+    }
+
+    .mode-option input { display: none; }
+
+    .mode-option span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        background: #262626;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        color: #a0a0a0;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+    }
+
+    .mode-option small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.75rem;
+        margin-top: 4px;
+        color: #666;
+    }
+
+    .mode-option input:checked + span {
+        background: rgba(232,194,122,0.12);
+        border-color: #e8c27a;
+        color: #e8c27a;
+    }
+
+    .mode-option input:checked + span small {
+        color: rgba(232,194,122,0.7);
+    }
+
+    .mode-option span:hover {
+        border-color: rgba(255,255,255,0.2);
+        color: #fff;
     }
 
     /* File upload */
@@ -484,21 +559,36 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
     }
 
     #successContainer h2 { font-size: 1.4rem; margin-bottom: 8px; }
-    #successContainer p { color: #a0a0a0; margin-bottom: 24px; }
+    #successContainer p { color: #a0a0a0; margin-bottom: 24px; max-width: 320px; }
+
+    .btn-success-wa {
+        display: inline-block;
+        background: #25D366;
+        color: #fff;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+        transition: opacity 0.2s;
+    }
+
+    .btn-success-wa:hover { opacity: 0.9; }
 
     .btn-new {
-        background: #e8c27a;
-        color: #0f0f0f;
-        border: none;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #a0a0a0;
         padding: 12px 32px;
         border-radius: 10px;
         font-size: 0.9rem;
-        font-weight: 600;
+        font-weight: 500;
         cursor: pointer;
         transition: all 0.2s;
     }
 
-    .btn-new:hover { background: #d4ae65; }
+    .btn-new:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
 
     /* Error */
     #errorContainer {
@@ -547,6 +637,8 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         .wizard-form { padding: 24px 16px 16px; }
         .style-options { flex-direction: column; }
         .style-option { min-width: 0; }
+        .mode-options { flex-direction: column; }
+        .mode-option { min-width: 0; }
     }
 </style>
 
@@ -554,7 +646,7 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
     body.modal-open-zynera { overflow: hidden; }
 </style>
 
-<script define:vars={{ SUBMITKIT_URL }}>
+<script define:vars={{ SUBMITKIT_URL, WHATSAPP_BASE }}>
     const MODAL = document.getElementById('zyneraModal');
     const FORM = document.getElementById('wizardForm');
     const FORM_WRAPPER = FORM;
@@ -619,7 +711,8 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         switch (step) {
             case 1: {
                 const v = els('name').value.trim();
-                btn.disabled = v.length < 2;
+                const mode = FORM.querySelector('input[name="Modo"]:checked');
+                btn.disabled = v.length < 2 || !mode;
                 break;
             }
             case 2: {
@@ -670,6 +763,10 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         const v = els('name').value.trim();
         els('nameError').textContent = v.length < 2 && v.length > 0 ? 'Mínimo 2 caracteres' : '';
         validateStep(1);
+    });
+
+    FORM.querySelectorAll('input[name="Modo"]').forEach(r => {
+        r.addEventListener('change', () => validateStep(1));
     });
 
     els('email')?.addEventListener('input', () => {
@@ -772,6 +869,8 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
         const fd = new FormData();
         fd.append('Nombre', els('name').value.trim());
         fd.append('Email', els('email').value.trim());
+        fd.append('Telefono', els('phone').value.trim());
+        fd.append('Modo', FORM.querySelector('input[name="Modo"]:checked').value);
         if (fileData) fd.append('Foto', fileData);
         fd.append('Estilo', FORM.querySelector('input[name="Estilo"]:checked').value);
         fd.append('Consentimiento', 'Acepto');
@@ -782,6 +881,12 @@ const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
                 body: fd,
                 mode: 'no-cors',
             });
+
+            // Build WhatsApp link with pre-filled message
+            const mode = FORM.querySelector('input[name="Modo"]:checked').value;
+            const name = els('name').value.trim();
+            const msg = `Hola Zynera! Soy ${name}. Quiero contratar el plan ${mode} para mejorar mi publicación.`;
+            els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
 
             hide(LOADING);
             show(SUCCESS);
