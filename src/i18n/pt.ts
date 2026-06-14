@@ -9,6 +9,7 @@ export default {
     skipToContent: 'Ir para o conteúdo principal',
   },
   header: {
+    homeLabel: 'Início da Zynera',
     servicios: 'Serviços',
     proceso: 'Processo',
     resultados: 'Resultados',
@@ -85,6 +86,7 @@ export default {
       title: '★ Primeira vez? Seu primeiro anúncio é grátis.',
       desc: 'Vaga limitada às primeiras 10 agências. Consulte pelo WhatsApp sem compromisso.',
       cta: 'Solicitar →',
+      waUrl: 'https://wa.me/595981123456?text=Ol%C3%A1%20Zynera!%20Quero%20solicitar%20meu%20primeiro%20an%C3%BAncio%20gr%C3%A1tis.',
       referral: '💰 Tem colegas? Para cada agência indicada, ganhe 10% de desconto no seu próximo serviço.',
     },
   },

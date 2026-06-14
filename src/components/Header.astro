@@ -13,7 +13,7 @@ const langPrefix = lang === 'es' ? baseUrl : `${baseUrl}${lang}/`;
 ---
 <header>
     <div class="container nav">
-        <a href={langPrefix} class="logo" aria-label="Inicio de Zynera">
+        <a href={langPrefix} class="logo" aria-label={dict.header.homeLabel}>
             <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
                 <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
@@ -45,7 +45,7 @@ const langPrefix = lang === 'es' ? baseUrl : `${baseUrl}${lang}/`;
         </div>
     </div>
 </header>
-<a href={WHATSAPP_URL} class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label="WhatsApp">&#128222;</a>
+<a href={WHATSAPP_URL} class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label={dict.header.whatsapp}>&#128222;</a>
 
 <style>
     header {

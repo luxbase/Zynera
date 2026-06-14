@@ -9,6 +9,7 @@ export default {
     skipToContent: 'Ir al contenido principal',
   },
   header: {
+    homeLabel: 'Inicio de Zynera',
     servicios: 'Servicios',
     proceso: 'Proceso',
     resultados: 'Resultados',
@@ -85,6 +86,7 @@ export default {
       title: '★ ¿Primera vez? Tu primer listing va gratis.',
       desc: 'Cupo limitado a las primeras 10 agencias. Consultanos por WhatsApp sin compromiso.',
       cta: 'Reclamar →',
+      waUrl: 'https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20reclamar%20mi%20primer%20listing%20gratis.',
       referral: '💰 ¿Tenés colegas? Por cada agencia referida, recibís 10% de descuento en tu próximo servicio.',
     },
   },

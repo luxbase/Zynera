@@ -9,6 +9,7 @@ export default {
     skipToContent: 'Skip to main content',
   },
   header: {
+    homeLabel: 'Zynera Home',
     servicios: 'Services',
     proceso: 'Process',
     resultados: 'Results',
@@ -83,9 +84,10 @@ export default {
     cta: 'Improve my listing →',
     coldStart: {
       title: '★ First time? Your first listing is free.',
-      desc: 'Limited to the first 10 agencies. Contact us on WhatsApp with no obligation.',
+      desc: 'Limited to the first 10 agencies. Ask on WhatsApp with no commitment.',
       cta: 'Claim now →',
-      referral: '💰 Refer a colleague and get 10% off your next service for each referred agency.',
+      waUrl: 'https://wa.me/595981123456?text=Hi%20Zynera!%20I%20want%20to%20claim%20my%20free%20first%20listing.',
+      referral: '💰 Know colleagues? For each agency you refer, get 10% off your next service.',
     },
   },
   process: {

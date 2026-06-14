@@ -6,7 +6,6 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const dict = t(lang);
 const WHATSAPP_URL = "https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20contratar%20el%20plan";
-const coldStartWa = "https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20reclamar%20mi%20primer%20listing%20gratis.";
 ---
 <section id="servicios" class="section-padding reveal">
     <div class="container">
@@ -32,7 +31,7 @@ const coldStartWa = "https://wa.me/595981123456?text=Hola%20Zynera!%20Quiero%20r
         </div>
         <div class="cold-start">
             <p class="cold-start-title">&#9733; {dict.pricing.coldStart.title}</p>
-            <p class="cold-start-desc">{dict.pricing.coldStart.desc} <a href={coldStartWa} target="_blank" rel="noopener">{dict.pricing.coldStart.cta}</a></p>
+            <p class="cold-start-desc">{dict.pricing.coldStart.desc} <a href={dict.pricing.coldStart.waUrl} target="_blank" rel="noopener">{dict.pricing.coldStart.cta}</a></p>
             <p class="cold-start-referral">{dict.pricing.coldStart.referral}</p>
         </div>
     </div>

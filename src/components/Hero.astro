@@ -36,7 +36,7 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                     </div>
                     <div class="slider-container" id="sliderContainer">
                         <div class="slider-half img-before">
-                            <img src={beforeImg} alt="Original sin staging" loading="eager" decoding="async" />
+                            <img src={beforeImg} alt={dict.comparison.original} loading="eager" decoding="async" />
                             <span class="tag">{dict.comparison.original}</span>
                         </div>
                         <div class="slider-half img-after" id="afterHalf">
@@ -45,7 +45,7 @@ const beforeImg = `${baseUrl}images/antes.webp`;
                                     class="style-img"
                                     data-style={s.id}
                                     src={s.img}
-                                    alt={`Staging ${s.label}`}
+                                    alt={`${dict.comparison.staging} ${s.label}`}
                                     loading={i === 0 ? 'eager' : 'lazy'}
                                     decoding="async"
                                     style={{ display: i === 0 ? '' : 'none' }}
