@@ -4,3 +4,4 @@ dist/
 *.log
 *.bak
 .DS_Store
+.a5c/
