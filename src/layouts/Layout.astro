@@ -1,28 +1,37 @@
 ---
+import { t, type Lang } from '../i18n';
+
 interface Props {
 	title: string;
 	description?: string;
+	lang: Lang;
 }
 
-const { title, description = "Transformamos propiedades en anuncios profesionales que generan más interés usando staging digital y fotografía profesional en Paraguay." } = Astro.props;
+const { lang, description, title: pageTitle } = Astro.props;
+const dict = t(lang);
+const desc = description ?? dict.meta.description;
+const title = pageTitle ?? dict.meta.title;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'><path d='M10 30V10H30' stroke='%23e8c27a' stroke-width='4' stroke-linecap='square'/><path d='M30 15H15V30' stroke='%23e8c27a' stroke-width='2.5' stroke-linecap='square'/><path d='M20 25V20H25' stroke='%23e8c27a' stroke-width='1.5' stroke-linecap='square'/></svg>" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<meta name="description" content={description} />
-		
+		<meta name="description" content={desc} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<slot />
+		<a href="#main-content" class="skip-link">{dict.layout.skipToContent}</a>
+		<div id="main-content">
+			<slot />
+		</div>
 	</body>
 </html>
 
@@ -95,6 +104,25 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 		transform: translateY(0);
 	}
 
+	.skip-link {
+		position: fixed;
+		top: -100%;
+		left: 16px;
+		z-index: 9999;
+		background: var(--accent-color);
+		color: var(--bg-color);
+		padding: 12px 24px;
+		border-radius: 8px;
+		font-weight: 700;
+		font-size: 0.9rem;
+		text-decoration: none;
+		transition: top 0.2s;
+	}
+
+	.skip-link:focus {
+		top: 16px;
+	}
+
 	@media (max-width: 768px) {
 		.section-header h2 {
 			font-size: 1.55rem;
@@ -104,6 +132,20 @@ const { title, description = "Transformamos propiedades en anuncios profesionale
 
 		.section-header p {
 			max-width: 300px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+
+		* {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
 		}
 	}
 </style>

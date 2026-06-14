@@ -1,12 +1,19 @@
 ---
+import { t, LANGUAGES, type Lang } from '../i18n';
 import { WHATSAPP_URL } from '../constants';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 const baseUrl = import.meta.env.BASE_URL;
-const isHomePage = Astro.url.pathname === baseUrl;
+const isHomePage = Astro.url.pathname === baseUrl || Astro.url.pathname === `${baseUrl}${lang}/`;
 const homeAnchorPrefix = isHomePage ? '' : baseUrl;
+const langPrefix = lang === 'es' ? baseUrl : `${baseUrl}${lang}/`;
 ---
 <header>
     <div class="container nav">
-        <a href={baseUrl} class="logo" aria-label="Inicio de Zynera">
+        <a href={langPrefix} class="logo" aria-label={dict.header.homeLabel}>
             <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 30V10H30" stroke="#e8c27a" stroke-width="4" stroke-linecap="square"/>
                 <path d="M30 15H15V30" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="square"/>
@@ -15,17 +22,30 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
             <span class="logo-text">Zynera</span>
         </a>
         <div class="nav-links">
-            <a href={`${homeAnchorPrefix}#servicios`}>Servicios</a>
-            <a href={`${homeAnchorPrefix}#proceso`}>Proceso</a>
-            <a href={`${homeAnchorPrefix}#resultados`}>Resultados</a>
-            <a href={`${homeAnchorPrefix}#faq`}>FAQ</a>
+            <a href={`${homeAnchorPrefix}#servicios`}>{dict.header.servicios}</a>
+            <a href={`${homeAnchorPrefix}#proceso`}>{dict.header.proceso}</a>
+            <a href={`${homeAnchorPrefix}#resultados`}>{dict.header.resultados}</a>
+            <a href={`${homeAnchorPrefix}#faq`}>{dict.header.faq}</a>
         </div>
         <div class="header-actions">
-            <button class="btn-contact" id="openContact" type="button">Mejorar mi publicación →</button>
-            <a href={WHATSAPP_URL} class="btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+            <button class="btn-contact" id="openContact" type="button">{dict.header.cta}</button>
+            <a href={WHATSAPP_URL} class="btn-whatsapp" target="_blank" rel="noopener">{dict.header.whatsapp}</a>
+            <div class="lang-switcher">
+                <button class="lang-btn" id="langBtn" type="button" aria-label={dict.languageSelector}>
+                    {lang.toUpperCase()}
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    {LANGUAGES.map(l => (
+                        <a href={l.code === 'es' ? baseUrl : `${baseUrl}${l.code}/`} class="lang-option" data-lang={l.code}>
+                            {l.label}
+                        </a>
+                    ))}
+                </div>
+            </div>
         </div>
     </div>
 </header>
+<a href={WHATSAPP_URL} class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label={dict.header.whatsapp}>&#128222;</a>
 
 <style>
     header {
@@ -126,6 +146,98 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
         transition: var(--transition-smooth);
     }
 
+    .wa-fab {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 900;
+        width: 56px;
+        height: 56px;
+        background: var(--whatsapp-green);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+    }
+
+    .wa-fab.visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    @media (min-width: 561px) {
+        .wa-fab { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .wa-fab { transition: none; }
+    }
+
+    /* Language switcher */
+    .lang-switcher {
+        position: relative;
+    }
+
+    .lang-btn {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: var(--text-dim);
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .lang-btn:hover {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+    }
+
+    .lang-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 4px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        min-width: 130px;
+        z-index: 10;
+    }
+
+    .lang-dropdown.open {
+        display: block;
+    }
+
+    .lang-option {
+        display: block;
+        padding: 10px 16px;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+    }
+
+    .lang-option:hover {
+        background: rgba(255,255,255,0.05);
+        color: var(--accent-color);
+    }
+
     @media (max-width: 560px) {
         header {
             padding: 18px 0;
@@ -140,8 +252,18 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
             letter-spacing: 3px;
         }
 
-        .header-actions {
+        .header-actions .btn-contact {
             display: none;
+        }
+
+        .btn-whatsapp {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .lang-btn {
+            padding: 4px 8px;
+            font-size: 0.7rem;
         }
     }
 </style>
@@ -150,4 +272,25 @@ const homeAnchorPrefix = isHomePage ? '' : baseUrl;
     document.getElementById('openContact')?.addEventListener('click', () => {
         window.dispatchEvent(new CustomEvent('toggle-modal'));
     });
+
+    // WhatsApp FAB
+    const fab = document.getElementById('waFab');
+    if (fab) {
+        const hero = document.querySelector('.hero');
+        const threshold = hero ? hero.offsetHeight : window.innerHeight;
+        const onScroll = () => {
+            fab.classList.toggle('visible', window.scrollY > threshold * 0.7);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // Language switcher
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    langBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langDropdown?.classList.toggle('open');
+    });
+    document.addEventListener('click', () => langDropdown?.classList.remove('open'));
 </script>

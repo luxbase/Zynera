@@ -10,15 +10,28 @@ import Footer from '../components/Footer.astro';
 import ContactModal from '../components/ContactModal.astro';
 ---
 
-<Layout title="Zynera | Staging Digital y Marketing Inmobiliario Premium">
-	<Header />
+<Layout lang="es" title={undefined}>
+	<Header lang="es" />
 	<main>
-		<Hero />
-		<Features />
-		<Pricing />
-		<Process />
-		<FAQ />
+		<Hero lang="es" />
+		<Features lang="es" />
+		<Pricing lang="es" />
+		<Process lang="es" />
+		<FAQ lang="es" />
 	</main>
-	<Footer />
-	<ContactModal />
+	<Footer lang="es" />
+	<ContactModal lang="es" />
 </Layout>
+
+<script>
+	const supported = ['es', 'en', 'pt'];
+	const stored = localStorage.getItem('zynera-lang');
+	const detected = stored
+		?? (navigator.language?.slice(0, 2))
+		?? (navigator.languages?.[0]?.slice(0, 2))
+		?? 'es';
+	const lang = supported.includes(detected) ? detected : 'es';
+	if (lang !== 'es' && !window.location.pathname.includes(`/${lang}/`)) {
+		window.location.replace(`${import.meta.env.BASE_URL}${lang}/`);
+	}
+</script>

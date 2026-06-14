@@ -1,27 +1,25 @@
 ---
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 ---
 <section id="proceso" class="section-padding reveal">
     <div class="container">
         <div class="section-header" style="text-align: center;">
-            <h2>Tu propiedad lista en 3 pasos</h2>
-            <p>Sin visitas, sin fotógrafo. Todo por WhatsApp o portal.</p>
+            <h2>{dict.process.heading}</h2>
+            <p>{dict.process.p}</p>
         </div>
         <div class="process-row">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>Mandás tu listing</h3>
-                <p>Nos enviás las fotos que ya tenés o el link del portal. También podés compartir acceso.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>Mejoramos</h3>
-                <p>Corregimos color, luz y nitidez. Reescribimos el texto. Decoramos ambientes digitalmente.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>Recibís</h3>
-                <p>Te devolvemos el ZIP listo para publicar o editamos el portal directamente por vos.</p>
-            </div>
+            {dict.process.steps.map((step, i) => (
+                <div class="process-step">
+                    <div class="step-number">{i + 1}</div>
+                    <h3>{step.title}</h3>
+                    <p>{step.text}</p>
+                </div>
+            ))}
         </div>
     </div>
 </section>

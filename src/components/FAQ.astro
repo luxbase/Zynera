@@ -1,53 +1,28 @@
 ---
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 ---
 <section id="faq" class="section-padding reveal">
     <div class="container" style="max-width: 800px;">
         <div class="section-header">
-            <h2>Preguntas Frecuentes</h2>
+            <h2>{dict.faq.heading}</h2>
         </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-                ¿Tengo que mover muebles o decorar la propiedad? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-1" hidden>
-                No es necesario. Nosotros capturamos el espacio tal cual está y luego realizamos la decoración virtual sobre la imagen real en post-producción.
+        {dict.faq.items.map((item, i) => (
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls={`faq-answer-${i + 1}`}>
+                    {item.q} <span class="faq-toggle">▼</span>
+                </button>
+                <div class="faq-answer" id={`faq-answer-${i + 1}`} hidden>
+                    {item.a}
+                </div>
             </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-                ¿En cuánto tiempo recibo el material final? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-2" hidden>
-                Nuestro compromiso de entrega es de 48 horas hábiles después de realizada la sesión de fotos en la propiedad.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-                ¿Llegan a todo el país? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-3" hidden>
-                Actualmente cubrimos Gran Asunción, proximamente Ciudad del Este y Encarnación. Consultanos por disponibilidad y viáticos para otras zonas de Paraguay.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-                ¿Qué estilos de decoración utilizan? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-4" hidden>
-                Contamos con catálogos modernos, industriales y clásicos. Seleccionamos el estilo que mejor se adapte al perfil del comprador ideal para esa zona.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-                ¿Las fotos sirven para portales y redes sociales? <span class="faq-toggle">▼</span>
-            </button>
-            <div class="faq-answer" id="faq-answer-5" hidden>
-                Sí. Todo el material se entrega en alta resolución para portales y optimizado para Instagram, TikTok y Facebook.
-            </div>
-        </div>
-        
+        ))}
         <div style="text-align: center; margin-top: 60px;">
-            <button class="btn-wizard" id="faqWizardBtn" type="button">Mejorar mi publicación →</button>
+            <button class="btn-wizard" id="faqWizardBtn" type="button">{dict.faq.cta}</button>
         </div>
     </div>
 </section>

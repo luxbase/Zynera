@@ -1,67 +1,70 @@
 ---
+import { t, type Lang } from '../i18n';
 import { WHATSAPP_NUMBER } from '../constants';
+
+interface Props { lang: Lang }
+
+const { lang } = Astro.props;
+const dict = t(lang);
 const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqcre2ma0004sp2dmw531c4e";
 const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
+const s = dict.modal.steps;
 ---
 
 <div class="modal" id="zyneraModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="modal-title">Mejorar mi publicación</span>
-            <button class="modal-close" id="closeModal" type="button" aria-label="Cerrar">&times;</button>
+            <span class="modal-title">{dict.modal.title}</span>
+            <button class="modal-close" id="closeModal" type="button" aria-label={dict.modal.closeLabel}>&times;</button>
         </div>
 
         <div class="step-indicator" id="stepIndicator">
-            <div class="step-dot active" data-step="1">1</div>
-            <div class="step-line"></div>
-            <div class="step-dot" data-step="2">2</div>
-            <div class="step-line"></div>
-            <div class="step-dot" data-step="3">3</div>
-            <div class="step-line"></div>
-            <div class="step-dot" data-step="4">4</div>
+            <div class="step-dot active" data-step="1" aria-label={dict.modal.stepIndicator.replace('{n}', '1')} role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">1</div>
+            <div class="step-line" aria-hidden="true"></div>
+            <div class="step-dot" data-step="2" aria-label={dict.modal.stepIndicator.replace('{n}', '2')} role="progressbar" aria-valuenow="2" aria-valuemin="1" aria-valuemax="4">2</div>
+            <div class="step-line" aria-hidden="true"></div>
+            <div class="step-dot" data-step="3" aria-label={dict.modal.stepIndicator.replace('{n}', '3')} role="progressbar" aria-valuenow="3" aria-valuemin="1" aria-valuemax="4">3</div>
+            <div class="step-line" aria-hidden="true"></div>
+            <div class="step-dot" data-step="4" aria-label={dict.modal.stepIndicator.replace('{n}', '4')} role="progressbar" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4">4</div>
         </div>
 
         <form id="wizardForm" class="wizard-form" novalidate>
             <div class="step-content">
                 <div class="step-panel active" data-step="1">
-                    <label class="step-label" for="name">¿Cuál es tu nombre?</label>
-                    <input type="text" id="name" class="input" name="Nombre" placeholder="Tu nombre" required autocomplete="name">
+                    <label class="step-label" for="name">{s[0].nameLabel}</label>
+                    <input type="text" id="name" class="input" name="Nombre" placeholder={s[0].namePlaceholder} required autocomplete="name">
                     <span class="error-msg" id="nameError"></span>
 
-                    <label class="step-label" style="margin-top: 20px;">¿Qué modo preferís?</label>
-                    <div class="mode-options">
-                        <label class="mode-option">
-                            <input type="radio" name="Modo" value="Handoff" checked>
-                            <span class="mode-label">Handoff — $49</span>
-                            <small>Mandás tus fotos, te devolvemos el ZIP</small>
-                        </label>
-                        <label class="mode-option">
-                            <input type="radio" name="Modo" value="Done-for-you">
-                            <span class="mode-label">Done-for-you — $79</span>
-                            <small>Accedemos al portal y lo editamos por vos</small>
-                        </label>
+                    <label class="step-label" style="margin-top: 20px;" id="modeLabel">{s[0].modeLabel}</label>
+                    <div class="mode-options" role="radiogroup" aria-labelledby="modeLabel">
+                        {s[0].modes.map(m => (
+                            <label class="mode-option">
+                                <input type="radio" name="Modo" value={m.value} checked={m.value === 'Handoff' ? true : undefined}>
+                                <span class="mode-label">{m.label}<small>{m.desc}</small></span>
+                            </label>
+                        ))}
                     </div>
                     <span class="error-msg" id="modeError"></span>
                 </div>
 
                 <div class="step-panel" data-step="2">
-                    <label class="step-label" for="email">¿Cuál es tu email?</label>
-                    <input type="email" id="email" class="input" name="Email" placeholder="tu@email.com" required autocomplete="email">
+                    <label class="step-label" for="email">{s[1].emailLabel}</label>
+                    <input type="email" id="email" class="input" name="Email" placeholder={s[1].emailPlaceholder} required autocomplete="email">
                     <span class="error-msg" id="emailError"></span>
 
-                    <label class="step-label" for="phone" style="margin-top: 20px;">WhatsApp o teléfono (opcional)</label>
-                    <input type="tel" id="phone" class="input" name="Telefono" placeholder="+595 981 123 456" autocomplete="tel">
+                    <label class="step-label" for="phone" style="margin-top: 20px;">{s[1].phoneLabel}</label>
+                    <input type="tel" id="phone" class="input" name="Telefono" placeholder={s[1].phonePlaceholder} autocomplete="tel">
                     <span class="error-msg" id="phoneError"></span>
                 </div>
 
                 <div class="step-panel" data-step="3">
-                    <label class="step-label">Foto de prueba</label>
-                    <div class="file-upload" id="fileDropZone">
+                    <label class="step-label">{s[2].photoLabel}</label>
+                    <div class="file-upload" id="fileDropZone" role="button" tabindex="0">
                         <input type="file" id="photo" name="Foto" accept="image/png,image/jpeg" required hidden>
                         <div class="file-placeholder" id="filePlaceholder">
                             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
-                            <span>Haz clic o arrastra una foto</span>
-                            <small>PNG o JPG &middot; M&aacute;x 5 MB</small>
+                            <span>{s[2].dropText}</span>
+                            <small>{s[2].dropFormat}</small>
                         </div>
                         <div class="file-preview" id="filePreview" style="display:none">
                             <img id="previewImg" alt="Preview">
@@ -72,56 +75,55 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
                 </div>
 
                 <div class="step-panel" data-step="4">
-                    <label class="step-label">Estilo deseado</label>
-                    <div class="style-options">
-                        <label class="style-option">
-                            <input type="radio" name="Estilo" value="Mediterráneo" required>
-                            <span>Mediterr&aacute;neo</span>
-                        </label>
-                        <label class="style-option">
-                            <input type="radio" name="Estilo" value="Manhattan">
-                            <span>Manhattan</span>
-                        </label>
-                        <label class="style-option">
-                            <input type="radio" name="Estilo" value="Minimalista">
-                            <span>Minimalista</span>
-                        </label>
+                    <label class="step-label" id="styleLabel">{s[3].styleLabel}</label>
+                    <div class="style-options" role="radiogroup" aria-labelledby="styleLabel">
+                        {s[3].styles.map(st => (
+                            <label class="style-option">
+                                <input type="radio" name="Estilo" value={st} required>
+                                <span>{st}</span>
+                            </label>
+                        ))}
                     </div>
                     <span class="error-msg" id="styleError"></span>
+                    <label class="consent-label" id="credentialConsentRow" style="display:none">
+                        <input type="checkbox" name="Credenciales" value="Acepto">
+                        <span>{s[3].credConsent}</span>
+                    </label>
                     <label class="consent-label">
                         <input type="checkbox" name="Consentimiento" value="Acepto" required>
-                        <span>Acepto la <a href="/Zynera/privacidad" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a></span>
+                        <span>{s[3].privacyConsent} <a href="/Zynera/privacidad" target="_blank" rel="noopener">({s[3].privacyLink})</a></span>
                     </label>
                 </div>
             </div>
 
             <div class="step-nav">
-                <button type="button" class="btn-back" id="btnBack" style="visibility:hidden">Atr&aacute;s</button>
-                <button type="button" class="btn-next" id="btnNext">Siguiente</button>
-                <button type="submit" class="btn-submit" id="btnSubmit" style="display:none">Enviar solicitud</button>
+                <button type="button" class="btn-back" id="btnBack" style="visibility:hidden">{dict.modal.back}</button>
+                <button type="button" class="btn-next" id="btnNext">{dict.modal.next}</button>
+                <button type="submit" class="btn-submit" id="btnSubmit" style="display:none">{dict.modal.submit}</button>
             </div>
         </form>
 
         <div id="loadingContainer" style="display:none">
             <div class="spinner"></div>
-            <p>Enviando solicitud...</p>
+            <p>{dict.modal.loading}</p>
         </div>
 
         <div id="successContainer" style="display:none">
             <div class="success-icon">&#10003;</div>
-            <h2>¡Solicitud enviada!</h2>
-            <p>Te escribimos al WhatsApp en las próximas 2 horas. Mientras tanto, prepará las fotos o el acceso al portal.</p>
-            <a class="btn-success-wa" id="successWaLink" href="#" target="_blank" rel="noopener">Escribinos por WhatsApp →</a>
-            <button class="btn-new" id="btnNew" type="button">Nueva solicitud</button>
+            <h2>{dict.modal.success.title}</h2>
+            <p>{dict.modal.success.text}</p>
+            <a class="btn-success-wa" id="successWaLink" href="#" target="_blank" rel="noopener">{dict.modal.success.waCta}</a>
+            <button class="btn-new" id="btnNew" type="button">{dict.modal.success.newRequest}</button>
         </div>
 
         <div id="errorContainer" style="display:none">
             <div class="error-icon">!</div>
-            <h2>Algo sali&oacute; mal</h2>
-            <p id="errorMsg">Intenta de nuevo m&aacute;s tarde.</p>
-            <button class="btn-retry" id="btnRetry" type="button">Intentar de nuevo</button>
+            <h2>{dict.modal.error.title}</h2>
+            <p id="errorMsg">{dict.modal.error.text}</p>
+            <button class="btn-retry" id="btnRetry" type="button">{dict.modal.error.retry}</button>
         </div>
     </div>
+    <iframe name="submit-frame" id="submitFrame" style="display:none" title="Form submission" aria-hidden="true"></iframe>
 </div>
 
 <style>
@@ -256,6 +258,11 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         to { opacity: 1; transform: translateY(0); }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        .step-panel { animation: none; }
+        .spinner { animation-duration: 1.4s; }
+    }
+
     .step-label {
         font-size: 1.05rem;
         font-weight: 500;
@@ -281,7 +288,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
     .error-msg {
         font-size: 0.8rem;
-        color: #ff6b6b;
+        color: #ff8585;
         min-height: 1.2em;
     }
 
@@ -301,6 +308,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
     .mode-option span {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 12px 16px;
@@ -331,6 +339,11 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
     .mode-option input:checked + span small {
         color: rgba(232,194,122,0.7);
+    }
+
+    .mode-option input:focus-visible + span {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
     }
 
     .mode-option span:hover {
@@ -432,6 +445,11 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         color: #e8c27a;
     }
 
+    .style-option input:focus-visible + span {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+    }
+
     .style-option span:hover {
         border-color: rgba(255,255,255,0.2);
         color: #fff;
@@ -442,7 +460,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 12px;
         cursor: pointer;
     }
 
@@ -646,7 +664,16 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     body.modal-open-zynera { overflow: hidden; }
 </style>
 
-<script define:vars={{ SUBMITKIT_URL, WHATSAPP_BASE }}>
+<script define:vars={{
+    SUBMITKIT_URL,
+    WHATSAPP_BASE,
+    NAME_ERROR: s[0].nameError,
+    MODE_ERROR: s[0].modeLabel,
+    EMAIL_ERROR: s[1].emailError,
+    PHOTO_ERROR_FORMAT: s[2].photoErrorFormat,
+    PHOTO_ERROR_SIZE: s[2].photoErrorSize,
+    WA_MESSAGE_TEMPLATE: dict.modal.success.waMessage,
+}}>
     const MODAL = document.getElementById('zyneraModal');
     const FORM = document.getElementById('wizardForm');
     const FORM_WRAPPER = FORM;
@@ -658,6 +685,29 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     let currentStep = 1;
     const totalSteps = 4;
     let fileData = null;
+    let triggerEl = null;
+
+    function getFocusable(el) {
+        if (!el) return [];
+        return Array.from(el.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+            .filter(n => !n.disabled && n.offsetParent !== null);
+    }
+
+    function trapFocus(e) {
+        const focusable = getFocusable(MODAL);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.key === 'Tab') {
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    }
 
     const els = (id) => document.getElementById(id);
 
@@ -666,16 +716,24 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     const block = (el) => { if (el) el.style.display = ''; };
 
     function openModal() {
+        triggerEl = document.activeElement;
         resetWizard();
         MODAL?.classList.add('active');
         MODAL?.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open-zynera');
+        setTimeout(() => {
+            const first = getFocusable(MODAL)[0];
+            if (first) first.focus();
+        }, 50);
+        document.addEventListener('keydown', trapFocus);
     }
 
     function closeModal() {
         MODAL?.classList.remove('active');
         MODAL?.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open-zynera');
+        document.removeEventListener('keydown', trapFocus);
+        if (triggerEl) setTimeout(() => triggerEl.focus(), 50);
     }
 
     function goToStep(step) {
@@ -685,6 +743,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
             const s = +d.dataset.step;
             d.classList.toggle('active', s === step);
             d.classList.toggle('done', s < step);
+            d.setAttribute('aria-valuenow', String(s));
         });
 
         const back = els('btnBack');
@@ -702,6 +761,10 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         }
 
         validateStep(step);
+        setTimeout(() => {
+            const f = getFocusable(MODAL)[0];
+            if (f) f.focus();
+        }, 50);
     }
 
     function validateStep(step) {
@@ -727,7 +790,9 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
             case 4: {
                 const style = FORM.querySelector('input[name="Estilo"]:checked');
                 const consent = FORM.querySelector('input[name="Consentimiento"]:checked');
-                btn.disabled = !style || !consent;
+                const credRow = els('credentialConsentRow');
+                const credOk = !credRow || credRow.style.display === 'none' || credRow.querySelector('input')?.checked;
+                btn.disabled = !style || !consent || !credOk;
                 break;
             }
         }
@@ -752,7 +817,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     els('btnNew')?.addEventListener('click', resetWizard);
 
     MODAL?.addEventListener('click', (e) => { if (e.target === MODAL) closeModal(); });
-    MODAL?.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && MODAL?.classList.contains('active')) closeModal(); });
 
     window.addEventListener('toggle-modal', () => {
         MODAL?.classList.contains('active') ? closeModal() : openModal();
@@ -761,18 +826,28 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     // Input validation on change
     els('name')?.addEventListener('input', () => {
         const v = els('name').value.trim();
-        els('nameError').textContent = v.length < 2 && v.length > 0 ? 'Mínimo 2 caracteres' : '';
+        els('nameError').textContent = v.length < 2 && v.length > 0 ? NAME_ERROR : '';
         validateStep(1);
     });
 
     FORM.querySelectorAll('input[name="Modo"]').forEach(r => {
-        r.addEventListener('change', () => validateStep(1));
+        r.addEventListener('change', () => {
+            validateStep(1);
+            const isDfy = r.value === 'Done-for-you';
+            const credRow = els('credentialConsentRow');
+            if (credRow) {
+                credRow.style.display = isDfy ? 'flex' : 'none';
+                const cb = credRow.querySelector('input');
+                if (cb) cb.required = isDfy;
+                if (!isDfy) cb.checked = false;
+            }
+        });
     });
 
     els('email')?.addEventListener('input', () => {
         const v = els('email').value.trim();
         const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-        els('emailError').textContent = v.length > 0 && !valid ? 'Email inválido' : '';
+        els('emailError').textContent = v.length > 0 && !valid ? EMAIL_ERROR : '';
         validateStep(2);
     });
 
@@ -785,6 +860,12 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     });
 
     dropZone?.addEventListener('click', () => fileInput?.click());
+    dropZone?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            fileInput?.click();
+        }
+    });
 
     dropZone?.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -814,12 +895,12 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         els('photoError').textContent = '';
         if (!f) { clearFile(); return; }
         if (!['image/png','image/jpeg'].includes(f.type)) {
-            els('photoError').textContent = 'Solo PNG o JPG';
+            els('photoError').textContent = PHOTO_ERROR_FORMAT;
             clearFile();
             return;
         }
         if (f.size > 5 * 1024 * 1024) {
-            els('photoError').textContent = 'Máximo 5 MB';
+            els('photoError').textContent = PHOTO_ERROR_SIZE;
             clearFile();
             return;
         }
@@ -847,6 +928,7 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
     });
 
     FORM.querySelector('input[name="Consentimiento"]')?.addEventListener('change', () => validateStep(4));
+    FORM.querySelector('input[name="Credenciales"]')?.addEventListener('change', () => validateStep(4));
 
     // Navigation buttons
     els('btnNext')?.addEventListener('click', () => {
@@ -857,8 +939,8 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         if (currentStep > 1) goToStep(currentStep - 1);
     });
 
-    // Submit
-    FORM?.addEventListener('submit', async (e) => {
+    // Submit — native POST via hidden iframe
+    FORM?.addEventListener('submit', (e) => {
         e.preventDefault();
         if (els('btnSubmit').disabled) return;
 
@@ -866,35 +948,19 @@ const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
         hide(FORM_WRAPPER);
         hide(ERROR);
 
-        const fd = new FormData();
-        fd.append('Nombre', els('name').value.trim());
-        fd.append('Email', els('email').value.trim());
-        fd.append('Telefono', els('phone').value.trim());
-        fd.append('Modo', FORM.querySelector('input[name="Modo"]:checked').value);
-        if (fileData) fd.append('Foto', fileData);
-        fd.append('Estilo', FORM.querySelector('input[name="Estilo"]:checked').value);
-        fd.append('Consentimiento', 'Acepto');
+        FORM.action = SUBMITKIT_URL;
+        FORM.method = 'POST';
+        FORM.enctype = 'multipart/form-data';
+        FORM.target = 'submit-frame';
+        FORM.submit();
 
-        try {
-            await fetch(SUBMITKIT_URL, {
-                method: 'POST',
-                body: fd,
-                mode: 'no-cors',
-            });
+        const mode = FORM.querySelector('input[name="Modo"]:checked').value;
+        const name = els('name').value.trim();
+        const msg = WA_MESSAGE_TEMPLATE.replace('{name}', name).replace('{mode}', mode);
+        els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
 
-            // Build WhatsApp link with pre-filled message
-            const mode = FORM.querySelector('input[name="Modo"]:checked').value;
-            const name = els('name').value.trim();
-            const msg = `Hola Zynera! Soy ${name}. Quiero contratar el plan ${mode} para mejorar mi publicación.`;
-            els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
-
-            hide(LOADING);
-            show(SUCCESS);
-        } catch (err) {
-            hide(LOADING);
-            ERROR_MSG.textContent = 'Error al enviar. Intenta de nuevo.';
-            show(ERROR);
-        }
+        hide(LOADING);
+        show(SUCCESS);
     });
 
     els('btnRetry')?.addEventListener('click', () => {
