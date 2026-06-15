@@ -8,18 +8,17 @@ const dict = t(lang);
 const baseUrl = import.meta.env.BASE_URL;
 
 const styles = [
-    { id: 'mediterraneo', label: dict.comparison.styles[0], img: `${baseUrl}images/Mediterraneo.webp` },
-    { id: 'manhattan', label: dict.comparison.styles[1], img: `${baseUrl}images/Manhattan.webp` },
-    { id: 'minimalist', label: dict.comparison.styles[2], img: `${baseUrl}images/Minimalist.webp` },
+    { id: 'mediterraneo', label: dict.comparison.styles[0], img: `${baseUrl}images/Mediterraneo.png` },
+    { id: 'manhattan', label: dict.comparison.styles[1], img: `${baseUrl}images/Manhattan.png` },
+    { id: 'minimalist', label: dict.comparison.styles[2], img: `${baseUrl}images/Minimalist.png` },
 ];
-const beforeImg = `${baseUrl}images/antes.webp`;
+const beforeImg = `${baseUrl}images/antes.png`;
 ---
 <section class="hero reveal">
     <div class="container">
         <div class="hero-content">
             <h1>{dict.hero.h1}</h1>
             <p>{dict.hero.p}</p>
-            <button class="hero-cta" id="heroCtaBtn" type="button">{dict.hero.cta}</button>
         </div>
         <section id="resultados" class="section-padding">
             <div class="container">
@@ -90,23 +89,6 @@ const beforeImg = `${baseUrl}images/antes.webp`;
         font-size: 1.2rem;
         max-width: 600px;
         margin: 0 auto 32px;
-    }
-
-    .hero-cta {
-        background-color: var(--accent-color);
-        color: var(--bg-color);
-        border: none;
-        padding: 14px 32px;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-        font-family: 'DM Sans', sans-serif;
-    }
-
-    .hero-cta:hover {
-        opacity: 0.9;
     }
 
     #resultados.section-padding {
@@ -308,10 +290,6 @@ const beforeImg = `${baseUrl}images/antes.webp`;
 </style>
 
 <script>
-    document.getElementById('heroCtaBtn')?.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('toggle-modal'));
-    });
-
     const sliderInput = document.getElementById('sliderInput');
     const afterHalf = document.getElementById('afterHalf');
     const sliderHandle = document.getElementById('sliderHandle');

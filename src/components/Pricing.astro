@@ -18,18 +18,19 @@ const dict = t(lang);
                     {card.popular && <span class="badge">{dict.pricing.popularBadge}</span>}
                     <span class="tier-name">{card.name}</span>
                     <div class="tier-price">{card.price} <span>{card.per}</span></div>
+                    {card.subtitle && <p class="tier-subtitle">{card.subtitle}</p>}
                     <ul class="tier-features">
                         {card.features.map(f => <li>{f}</li>)}
                     </ul>
                 </div>
             ))}
         </div>
-        <p class="payment-note">{dict.pricing.paymentNote}</p>
         <div class="pricing-cta">
-            <button class="btn-pricing-cta" id="pricingCtaBtn" type="button">{dict.pricing.cta}</button>
+            <button class="btn-pricing-cta" id="pricingCtaBtn" type="button">{dict.pricing.pricingCta}</button>
         </div>
+        <p class="payment-note">{dict.pricing.paymentNote}</p>
         <div class="cold-start">
-            <p class="cold-start-title">&#9733; {dict.pricing.coldStart.title}</p>
+            <p class="cold-start-title">{dict.pricing.coldStart.title}</p>
             <p class="cold-start-desc">{dict.pricing.coldStart.desc} <a href={dict.pricing.coldStart.waUrl} target="_blank" rel="noopener">{dict.pricing.coldStart.cta}</a></p>
             <p class="cold-start-referral">{dict.pricing.coldStart.referral}</p>
         </div>
@@ -40,14 +41,14 @@ const dict = t(lang);
     .services-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 32px;
-        max-width: 700px;
+        gap: 24px;
+        max-width: 1060px;
         margin: 0 auto;
     }
 
     .pricing-card {
         background: var(--card-bg);
-        padding: 48px;
+        padding: 32px;
         border-radius: 24px;
         border: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
@@ -77,13 +78,13 @@ const dict = t(lang);
         font-size: 0.9rem;
         letter-spacing: 2px;
         color: var(--accent-color);
-        margin-bottom: 16px;
+        margin-bottom: 10px;
         font-weight: 700;
     }
 
     .tier-price {
-        font-size: 3rem;
-        margin-bottom: 32px;
+        font-size: 2.5rem;
+        margin-bottom: 4px;
         font-family: 'Playfair Display', serif;
     }
 
@@ -93,18 +94,25 @@ const dict = t(lang);
         font-family: 'DM Sans', sans-serif;
     }
 
+    .tier-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        margin-bottom: 16px;
+    }
+
     .tier-features {
         list-style: none;
         flex-grow: 1;
-        margin-bottom: 32px;
+        margin-bottom: 20px;
     }
 
     .tier-features li {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         color: var(--text-dim);
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
+        font-size: 0.9rem;
     }
 
     .tier-features li::before {
@@ -113,16 +121,9 @@ const dict = t(lang);
         font-weight: bold;
     }
 
-    .payment-note {
-        text-align: center;
-        color: var(--text-dim);
-        font-size: 0.85rem;
-        margin-top: 32px;
-    }
-
     .pricing-cta {
         text-align: center;
-        margin-top: 48px;
+        margin-top: 32px;
     }
 
     .btn-pricing-cta {
@@ -142,11 +143,21 @@ const dict = t(lang);
         opacity: 0.9;
     }
 
+    .payment-note {
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        margin-top: 32px;
+    }
+
     .cold-start {
         text-align: center;
         margin-top: 60px;
         padding-top: 40px;
         border-top: 1px solid rgba(255,255,255,0.06);
+        max-width: 1060px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .cold-start-title {
