@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContactModal from '../../components/ContactModal.astro';
+import { t, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'es' } },
+        { params: { lang: 'en' } },
+        { params: { lang: 'pt' } },
+    ];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const dict = t(lang);
+const p = dict.privacy;
+---
+
+<Layout lang={lang} title={p.metaTitle} description={p.metaDescription}>
+    <Header lang={lang} />
+    <main class="privacy-page">
+        <section class="container privacy-content">
+            <a href={`${import.meta.env.BASE_URL}${lang}/`} class="back-link">{p.backHome}</a>
+            <h1>{p.heading}</h1>
+            <p>{p.intro}</p>
+
+            {p.sections.map(section => (
+                <>
+                    <h2>{section.heading}</h2>
+                    <p>{section.text}</p>
+                </>
+            ))}
+        </section>
+    </main>
+    <Footer lang={lang} />
+    <ContactModal lang={lang} />
+</Layout>
+
+<style>
+    .privacy-page {
+        padding-top: 120px;
+    }
+
+    .privacy-content {
+        max-width: 840px;
+        padding-bottom: 90px;
+    }
+
+    .back-link {
+        display: inline-block;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+        transition: color 0.2s;
+    }
+    .back-link:hover {
+        color: var(--accent-color);
+    }
+
+    .privacy-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        margin-bottom: 24px;
+    }
+
+    .privacy-content h2 {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.15rem;
+        margin-top: 36px;
+        margin-bottom: 10px;
+    }
+
+    .privacy-content p {
+        color: var(--text-dim);
+        font-size: 1rem;
+        max-width: 720px;
+    }
+</style>

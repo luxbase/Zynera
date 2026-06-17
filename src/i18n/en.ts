@@ -42,7 +42,7 @@ export default {
       {
         icon: '⏱️',
         title: 'More inquiries, less time on market',
-        text: 'We have seen that properties with digital staging receive more inquiries and tend to sell faster than those with ordinary photos.',
+        text: 'Properties with digital staging receive more inquiries and tend to sell faster than those with ordinary photos.',
       },
       {
         icon: '⭐',
@@ -64,7 +64,7 @@ export default {
           'Send us your photos or we download them from the portal',
           'We correct color, light and sharpness',
           'We virtually furnish the property',
-          'We rewrite the description',
+          'We enhance your listing description',
           'You get the ZIP in 24 hours',
         ],
         cta: 'Request →',
@@ -80,11 +80,9 @@ export default {
           'Send us your photos or we download them from the portal',
           'We correct color, light and sharpness',
           'We virtually furnish the property',
-          'We rewrite the description',
+          'We enhance your listing description',
           'You get the ZIP in 24 hours',
-          'Priority delivery in 12 hours',
           'Dedicated WhatsApp group',
-          'Exports for Stories and Reels',
         ],
         cta: 'Start →',
         ctaUrl: 'https://wa.me/595981123456?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Pro.',
@@ -98,13 +96,10 @@ export default {
           'Send us your photos or we download them from the portal',
           'We correct color, light and sharpness',
           'We virtually furnish the property',
-          'We rewrite the description',
+          'We enhance your listing description',
           'You get the ZIP in 24 hours',
-          'Priority delivery in 12 hours',
           'Dedicated WhatsApp group',
-          'Exports for Stories and Reels',
           'Bilingual text (ES + PT or EN)',
-          'Monthly property report',
         ],
         cta: 'Contact →',
         ctaUrl: 'https://wa.me/595981123456?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Agency.',
@@ -112,7 +107,7 @@ export default {
     ],
     popularBadge: 'RECOMMENDED',
     pricingCta: 'Improve my listing →',
-    paymentNote: 'Pay in guaraníes or bank transfer · All plans include unlimited photos per property + optimized text.',
+    paymentNote: ' All plans include unlimited photos per property + optimized text.',
     coldStart: {
       title: '★ ★ First time? Your first listing is free.',
       desc: 'Limited to the first 10 agencies. Ask on WhatsApp with no commitment.',
@@ -152,15 +147,15 @@ export default {
       },
       {
         q: 'How long does it take to get the final material?',
-        a: 'Our delivery commitment is 48 business hours after the photo session at the property.',
+        a: 'Within 24 hours of obtaining the photos, your visual presentation will be ready to publish.',
       },
       {
         q: 'Do you cover the whole country?',
-        a: 'We currently cover Greater Asunción, soon Ciudad del Este and Encarnación. Ask about availability for other areas of Paraguay.',
+        a: 'We work with properties across all of Paraguay. No matter where the property is located, we can help you create a professional visual presentation.',
       },
       {
         q: 'What decoration styles do you use?',
-        a: 'We have modern, industrial and classic catalogs. We select the style that best fits the ideal buyer profile for that area.',
+        a: 'Choose from three carefully crafted styles—modern, industrial, or classic. Each one brings a unique identity designed to showcase your property`s full potential.',
       },
       {
         q: 'Are the photos suitable for portals and social media?',
@@ -227,6 +222,31 @@ export default {
       text: 'Please try again later.',
       retry: 'Try again',
     },
+  },
+  privacy: {
+    metaTitle: 'Privacy | Qualis Studio',
+    backHome: '← Back to home',
+    metaDescription: 'Privacy policy and photo handling for Qualis Studio\'s digital staging samples.',
+    heading: 'Privacy',
+    intro: 'Qualis Studio uses the data you send us to process your digital staging request, handle your sample photo, and deliver the result via email or WhatsApp.',
+    sections: [
+      {
+        heading: 'Data we receive',
+        text: 'We may collect your name, email, selected style, and the photo you attach. Property photos may contain private information about the property or its occupants; only send images you are authorized to share.',
+      },
+      {
+        heading: 'Use and retention',
+        text: 'We use the information solely to prepare the sample, coordinate delivery, and improve the service. For the manual MVP, we keep the photo and data only as long as needed to process and follow up on your request.',
+      },
+      {
+        heading: 'Third parties',
+        text: 'The form uses SubmitKit for data and file submission, and coordination may continue via email or WhatsApp. When the product evolves to SaaS, this page will need to be updated with the hosting, storage, authentication, and processing providers that are adopted.',
+      },
+      {
+        heading: 'Deletion',
+        text: 'You can request that we delete your photos and test data by replying through the same channel we used to coordinate delivery.',
+      },
+    ],
   },
   footer: {
     tagline: '100% remote service · All Paraguay',
