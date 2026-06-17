@@ -12,12 +12,11 @@ const langPrefix = `${baseUrl}${lang}/`;
     <div class="container">
         <div class="footer-main">
             <div class="footer-brand">
-                <a href={langPrefix} class="footer-logo">
-                    <svg class="footer-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="10" stroke="#e8c27a" stroke-width="3"/>
-                        <line x1="27.1" y1="27.1" x2="33" y2="33" stroke="#e8c27a" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                    Qualis Studio
+                <a href="#" class="footer-logo">
+                    <span class="logo-main">
+                        Qualis<span class="s-highlight">S</span>tudio
+                    </span>
+                    <span class="logo-sub">Creative Studio</span>
                 </a>
                 <p class="footer-tag">{dict.footer.tagline}</p>
             </div>
@@ -29,6 +28,10 @@ const langPrefix = `${baseUrl}${lang}/`;
             </nav>
         </div>
         <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="https://luxbase.github.io/qualis-slider/" target="_blank" rel="noopener">{dict.footer.slider}</a>
+                <span class="footer-bottom-sep">·</span>
+            </div>
             <p>&copy; {new Date().getFullYear()} {dict.footer.copyright}</p>
         </div>
     </div>
@@ -56,19 +59,45 @@ const langPrefix = `${baseUrl}${lang}/`;
 
     .footer-logo {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--accent-color);
+        flex-direction: column;
+        align-items: flex-start;
         text-decoration: none;
-        letter-spacing: 2px;
+        line-height: 1;
+        flex-shrink: 0;
     }
 
-    .footer-mark {
-        width: 24px;
-        height: 24px;
+    .footer-logo .logo-main {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.55rem;
+        font-weight: 300;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+
+    .footer-logo .logo-main .s-highlight {
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+    }
+
+    .footer-logo .logo-main .s-highlight::after {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: #ffffff;
+    }
+
+    .footer-logo .logo-sub {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.55rem;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #666666;
+        margin-top: 4px;
     }
 
     .footer-tag {
@@ -101,5 +130,26 @@ const langPrefix = `${baseUrl}${lang}/`;
         text-align: center;
         color: var(--text-dim);
         font-size: 0.8rem;
+    }
+
+    .footer-bottom-links {
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .footer-bottom-links a {
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .footer-bottom-links a:hover {
+        color: var(--accent-color);
+    }
+
+    .footer-bottom-sep {
+        color: #555;
     }
 </style>

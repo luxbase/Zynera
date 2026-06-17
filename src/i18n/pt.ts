@@ -254,6 +254,7 @@ export default {
     faq: 'FAQ',
     whatsapp: 'WhatsApp',
     privacidad: 'Privacidade',
+    slider: 'Slider',
     copyright: 'Qualis Studio — Assunção, Paraguai',
   },
   languageSelector: 'Selecionar idioma',
